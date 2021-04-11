@@ -1,0 +1,196 @@
+@import "./_mixins.scss";
+@import "./_variables.scss";
+
+header {
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+  background: $red;
+  display: flex;
+  width: 100%;
+  overflow: auto;
+  text-align: center;
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  padding: 0px 20px;
+  font-size: 20px;
+  @include pc-width {
+    padding: 0px;
+    background: #fff;
+  }
+}
+
+.logo-area {
+  height: 100%;
+  line-height: 67px;
+  width: 50%;
+  background: $red;
+  color: #fff;
+  text-align: left;
+  font-size: 28px;
+  transition: 0.4s;
+  cursor: pointer;
+  @include pc-width {
+    text-align: center;
+    max-width: 300px;
+    flex: 2;
+    &:hover {
+      background: $bloodred;
+    }
+  }
+}
+.menu-area {
+  height: 100%;
+  line-height: 67px;
+  text-align: center;
+  display: none;
+  @include pc-width {
+    flex: 4;
+    display: block;
+  }
+  a:link,
+  a:visited {
+    color: #000;
+  }
+  li {
+    display: inline-block;
+    margin: 0px 10px;
+  }
+}
+.search-bar {
+  height: 100%;
+  line-height: 67px;
+  text-align: center;
+  display: none;
+  @include pc-width {
+    flex: 3;
+    display: block;
+  }
+  .search-select {
+    display: inline-block;
+    height: 32px;
+    width: 5rem;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 0px;
+    outline: 1px solid $gray;
+    outline-offset: 0px;
+  }
+  .search-textbox {
+    display: inline-block;
+    height: 34px;
+    vertical-align: middle;
+    max-width: calc(100% - 10rem);
+    border: 1px solid $gray;
+  }
+  .search-btn {
+    display: inline-block;
+    vertical-align: middle;
+    width: 4rem;
+    padding: 0px;
+    margin-right: 0px;
+  }
+}
+.login-area {
+  height: 100%;
+  line-height: 67px;
+  max-width: 20%;
+  display: none;
+  @include pc-width {
+    flex: 2;
+    display: block;
+  }
+  li {
+    display: inline-block;
+    a {
+      margin-right: 10px;
+      color: $red;
+      text-decoration: none;
+    }
+  }
+}
+.mobile-menu-area {
+  position: absolute;
+  right: 20px;
+  .trigger-button > div {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  .closed .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-8px, 6px);
+  }
+  .closed .bar2 {
+    opacity: 0;
+  }
+  .closed .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+  @include pc-width {
+    display: none;
+  }
+}
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 66px;
+  left: 0;
+  background-color: $red;
+  overflow-y: hidden;
+  transition: 0.5s;
+  &.open {
+    height: calc(100% - 67px);
+  }
+  .overlay-content {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    margin-top: 30px;
+    padding: 0px 20px;
+  }
+
+  .search-bar-mobile {
+    width: 100%;
+    .search-select {
+      display: inline-block;
+      height: 32px;
+      width: 5rem;
+      vertical-align: middle;
+      background-color: #fff;
+      border: 0px;
+      outline: 1px solid $gray;
+      outline-offset: 0px;
+    }
+    .search-textbox {
+      display: inline-block;
+      height: 34px;
+      vertical-align: middle;
+      max-width: calc(100% - 10rem);
+      border: 1px solid $gray;
+    }
+    .search-btn {
+      display: inline-block;
+      vertical-align: middle;
+      width: 4rem;
+      padding: 0px;
+      margin-right: 0px;
+    }
+  }
+  ul {
+    margin-bottom: 2em;
+  }
+  li {
+    color: #fff;
+    line-height: 3rem;
+    display: block;
+  }
+  a {
+    font-size: 20px;
+    color: #fff;
+  }
+}
