@@ -6,21 +6,32 @@ import {
   useLocation,
   useHistory,
 } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/user";
+import store from "../store/index";
 
 function HeaderBar() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
   const [mobileOverlayHeight, setMobileOverlayHeight] = useState("");
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [triggerButtonClass, setTriggerButtonClass] = useState("");
   const [search, setSearch] = useState("");
+  const [logined, setLogined] = useState(store.getState().user.user);
+
+  store.subscribe(() => {
+    // When state will be updated(in our case, when items will be fetched),
+    // we will update local component state and force component to rerender
+    // with new data.
+    setLogined(store.getState().user.user);
+  });
 
   useEffect(() => {
     triggerMobileMenu(false);
   }, [pathname]);
 
-  const logined = false;
-
+  console.log(logined);
   function goIndex() {
     history.push(`/`);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -29,8 +40,8 @@ function HeaderBar() {
     let key = search.trim();
     history.push(`/record?search=${key}`);
   }
-  function logout() {
-    // this.$store.commit("logout");
+  function clickLogout() {
+    dispatch(logout());
   }
   function triggerMobileMenu(toStatus) {
     setIsMobileMenuOpened(toStatus);
@@ -87,7 +98,11 @@ function HeaderBar() {
             className="search-textbox"
             onChange={handleChange}
           />
-          <button type="button" className="btn search-btn" onClick={goRecords}>
+          <button
+            type="button"
+            className="btn search-btn"
+            onClick={() => goRecords()}
+          >
             查詢
           </button>
         </div>
@@ -99,8 +114,9 @@ function HeaderBar() {
                   管理後台
                 </a>
               </li>
+              |
               <li>
-                <a href="#logout" vue-ref="#logout" onClick={logout()}>
+                <a href="#" vue-ref="#logout" onClick={() => clickLogout()}>
                   登出
                 </a>
               </li>
@@ -152,7 +168,11 @@ function HeaderBar() {
                   </a>
                 </li>
                 <li>
-                  <a href="logout" vue-ref="#logout" onClick={logout}>
+                  <a
+                    href="logout"
+                    vue-ref="#logout"
+                    onClick={() => clickLogout()}
+                  >
                     登出
                   </a>
                 </li>

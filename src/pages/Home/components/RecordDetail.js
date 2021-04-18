@@ -11,8 +11,8 @@ import {
 function RecordDetail() {
   const history = useHistory();
 
-  let record = localStorage.getItem("record")
-    ? JSON.parse(localStorage.getItem("record"))
+  let record = sessionStorage.getItem("record")
+    ? JSON.parse(sessionStorage.getItem("record"))
     : {};
   const {
     id,

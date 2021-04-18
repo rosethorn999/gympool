@@ -1,11 +1,15 @@
 import "../scss/Login.scss";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import basicRequest from "../apis/api.js";
+import basicRequest from "../../../apis/api";
 import { open, close } from "./Spinner";
 import { HashRouter as Router, Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/user";
 
-function Login() {
+function UserLogin() {
+  const dispatch = useDispatch();
+
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +40,7 @@ function Login() {
 
     return !(invalidForm.email || invalidForm.password); // true=ok;false=ng
   }
-  function login() {
+  function clickLogin() {
     let isValid = validForm();
     if (isValid) {
       let url = "/login/";
@@ -46,13 +50,10 @@ function Login() {
         .post(url, o)
         .then((response) => {
           Swal.fire("嗨", "歡迎回來!", "success").then(() => {
-            // token
             let token = "jwt " + response.data.token;
-            this.$store.commit("setToken", token);
-            // user
             let user = response.data.user;
-            this.$store.commit("setUser", user);
-            history.push("/index");
+            dispatch(login({ token, user }));
+            history.push("/");
           });
         })
         .catch(function (error) {
@@ -81,12 +82,6 @@ function Login() {
 
   return (
     <div className="login container">
-      <pre>dirty{JSON.stringify(dirty, null, 2)}</pre>
-      <pre>invalidForm{JSON.stringify(invalidForm, null, 2)}</pre>
-      <pre>
-        email:{email}
-        password:{password}
-      </pre>
       <p>用電子郵件登入</p>
       <div className="form-group">
         <input
@@ -115,7 +110,7 @@ function Login() {
         </Router>
       </div>
       <div className="button-box">
-        <button className="btn blue" onClick={login}>
+        <button className="btn blue" onClick={() => clickLogin()}>
           送出
         </button>
       </div>
@@ -123,4 +118,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default UserLogin;

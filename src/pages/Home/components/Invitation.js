@@ -1,7 +1,7 @@
 import "../scss/Invitation.scss";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import basicRequest from "../apis/api.js";
+import basicRequest from "../../../apis/api";
 import { open, close } from "./Spinner";
 function Accessory() {
   const [email, setEmail] = useState("");

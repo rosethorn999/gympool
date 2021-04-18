@@ -1,16 +1,9 @@
 import "../scss/ResetPassword.scss";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import basicRequest from "../apis/api.js";
+import basicRequest from "../../../apis/api";
 import { Spinner, open, close } from "./Spinner";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function ResetPassword() {
   const history = useHistory();

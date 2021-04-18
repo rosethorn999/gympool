@@ -1,12 +1,5 @@
 import "../scss/FooterBar.scss";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import { HashRouter as Router, Link } from "react-router-dom";
 
 function FooterBar() {
   return (

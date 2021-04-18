@@ -4,7 +4,7 @@ import HeaderBar from "./components/HeaderBar";
 import FooterBar from "./components/FooterBar";
 import About from "./components/About";
 import React from "react";
-import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Index from "./components/Index";
 import Record from "./components/Record";
 import Accessory from "./components/Accessory";
@@ -13,7 +13,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import RecordDetail from "./components/RecordDetail";
 import Notice from "./components/Notice";
 import Invitation from "./components/Invitation";
-import Login from "./components/Login";
+import UserLogin from "./components/UserLogin";
 import ResetPassword from "./components/ResetPassword";
 
 import { Spinner } from "./components/Spinner";
@@ -34,7 +34,7 @@ function App() {
           <Route path="/recordDetail" component={RecordDetail} />
           <Route path="/notice" component={Notice} />
           <Route path="/invitation" component={Invitation} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={UserLogin} />
           <Route path="/resetPassword" component={ResetPassword} />
         </Switch>
 

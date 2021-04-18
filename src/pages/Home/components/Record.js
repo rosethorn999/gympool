@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 import RecordBox from "./RecordBox";
 import loadingGif from "../assets/loading.gif";
-import basicRequest from "../apis/api.js";
+import basicRequest from "../../../apis/api";
 import selections from "../assets/selections.json";
 import zipcode from "../assets/twZipCode.json";
 
@@ -122,7 +122,7 @@ function Record() {
   };
   const checkout = (index) => {
     let record = records[index];
-    localStorage.setItem("record", JSON.stringify(record));
+    sessionStorage.setItem("record", JSON.stringify(record));
     let id = record.id;
     history.push(`/recordDetail?recordId=${id}`);
   };

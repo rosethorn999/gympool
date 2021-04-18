@@ -2,7 +2,7 @@ import "../scss/Index.scss";
 import { useState, useEffect } from "react";
 import { HashRouter as Router, Link, useHistory } from "react-router-dom";
 import RecordBox from "./RecordBox";
-import basicRequest from "../apis/api.js";
+import basicRequest from "../../../apis/api";
 
 function Index() {
   const history = useHistory();
@@ -16,7 +16,7 @@ function Index() {
   }, []);
   function checkout(index) {
     let record = records[index];
-    localStorage.setItem("record", JSON.stringify(record));
+    sessionStorage.setItem("record", JSON.stringify(record));
     let id = record.id;
     history.push(`/recordDetail?recordId=${id}`);
   }

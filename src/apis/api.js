@@ -32,6 +32,5 @@ basicRequest.interceptors.request.use(
   }
 );
 
-let main = { host, basicRequest };
-// FIXME: host not export
+export { host };
 export default basicRequest;
