@@ -1,0 +1,94 @@
+@import "../../scss/mixins";
+@import "../../scss/_variables";
+
+.records {
+  background: #f5f7f8;
+  width: 100%;
+
+  .container {
+    padding: $phone-padding;
+    height: 100%;
+    @include pc-width {
+      padding: 0px $pc-padding;
+    }
+  }
+  .you-should-know {
+    box-sizing: border-box;
+    height: 307px;
+    background-image: url("../assets/bg.png");
+    color: $white;
+    padding: 60px $phone-padding 150px;
+    width: 100%;
+    @include pc-width {
+      padding: 52px $pc-padding;
+    }
+    p {
+      font-size: 30px;
+      @include pc-width {
+        font-size: 40px;
+      }
+      a:link,
+      a:visited {
+        color: #dee2e6;
+      }
+      a:hover {
+        color: $white;
+      }
+      &:last-child {
+        font-size: $pc-font-size;
+      }
+    }
+    a {
+      color: $white;
+    }
+  }
+  .list-header {
+    margin: 10px 0px;
+    @include pc-width {
+      display: flex;
+    }
+    div {
+      width: 100%;
+      line-height: 50px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .query-counter {
+      font-size: 24px;
+      @include pc-width {
+        flex: 1;
+      }
+    }
+    .query-fun {
+      text-align: right;
+      overflow: auto;
+      white-space: nowrap;
+      @include pc-width {
+        flex: 2;
+      }
+    }
+    .filter,
+    .sorter {
+      width: 145px;
+      margin-left: 10px;
+    }
+  }
+
+  .record-container {
+    .pagination-block {
+      height: 100px;
+      margin-top: 50px;
+      text-align: center;
+      .pagination-btn {
+        cursor: pointer;
+        margin: 0px 10px;
+        padding: 10px 25px;
+        border: 1px solid #707070;
+        color: #0058e5;
+        @include pc-width {
+          margin: 0px 50px;
+        }
+      }
+    }
+  }
+}

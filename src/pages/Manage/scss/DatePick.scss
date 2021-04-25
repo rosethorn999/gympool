@@ -1,0 +1,9 @@
+.DatePick {
+  display: flex;
+  > div {
+    flex: 1;
+    > select {
+      width: 100%;
+    }
+  }
+}

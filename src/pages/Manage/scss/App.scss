@@ -1,0 +1,138 @@
+@import "../../scss/mixins";
+@import "../../scss/_variables";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100vw;
+}
+
+.App {
+  display: inline-block;
+  font-family: "Noto Sans TC", Arial, sans-serif;
+  width: 1920px;
+  color: #2c3e50;
+  background: #222222;
+  @include pc-width {
+    width: 100%;
+  }
+  input[type="number"],
+  input[type="text"],
+  select,
+  textarea {
+    border-radius: 2px;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    height: 32px;
+    &:disabled {
+      color: rgba(0, 0, 0, 0.38);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  textarea {
+    height: auto;
+  }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-indent: 5px;
+    padding: 5px;
+    &:disabled {
+      color: rgba(0, 0, 0, 0.38);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  button.add-record {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    cursor: pointer;
+    color: $white;
+    background-color: black;
+    margin: 6px 8px;
+    width: 85px;
+    height: 85px;
+    font-size: 50px;
+    background-position: 50% 40%;
+    background-size: auto;
+    border-radius: 50%;
+    border: 0;
+    overflow: hidden;
+    opacity: 0.9;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  select.danger,
+  input.danger {
+    border: #ff5252 solid 1px;
+  }
+  p.danger {
+    color: #ff5252;
+  }
+  .modal {
+    top: 0;
+    position: fixed;
+    z-index: 2000;
+    background: #fff;
+    width: 100vw;
+    height: 100vh;
+    .modal-header {
+      height: 58px;
+      border-bottom: 1px solid rgb(235, 235, 235);
+      div {
+        display: inline-block;
+        width: 50%;
+        padding: 0px 10%;
+        &:nth-of-type(1) {
+          vertical-align: middle;
+          text-align: left;
+        }
+        &:nth-of-type(2) {
+          vertical-align: middle;
+          text-align: right;
+        }
+      }
+    }
+  }
+  .router-view {
+    display: inline-block;
+    background: #f5f7f8;
+    width: 85%;
+    min-height: 100vh;
+    margin-left: 15%;
+  }
+  .btn {
+    height: 40px;
+    padding: 5px 30px;
+    border-radius: 13px;
+    margin: 0px 12px;
+    cursor: pointer;
+    &.blue {
+      background: $blue;
+      color: #fff;
+    }
+    &.pink {
+      background: $pink;
+      color: #fff;
+    }
+    &:focus {
+      outline: none;
+    }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

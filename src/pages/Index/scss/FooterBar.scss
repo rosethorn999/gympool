@@ -1,0 +1,76 @@
+@import "../../scss/mixins";
+@import "../../scss/_variables";
+
+.FooterBar {
+  a {
+    text-decoration: none;
+    color: #dee2e6;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  footer {
+    text-align: center;
+    background: #272e33;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      font-size: 16px;
+      line-height: 1.5rem;
+      margin-bottom: 8px;
+      &.fans-club > a {
+        padding: 10px 25px;
+        border: 1px solid #fff;
+      }
+    }
+  }
+  .footer-block {
+    color: #fff;
+    background: #30363b;
+    min-height: 200px;
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 28px 10vw 0px 10vw;
+    text-align: left;
+    .column {
+      display: block;
+      flex: 1;
+      min-width: 50%;
+      height: 200px;
+      @include pc-width {
+        min-width: 25%;
+      }
+      &.fake {
+        display: none;
+        @include pc-width {
+          display: block;
+        }
+      }
+      &.fans-container {
+        text-align: center;
+      }
+      p.blue {
+        margin: 10px 0px;
+        font-size: 20px;
+        color: #40a7ff;
+      }
+    }
+  }
+  .copyright {
+    color: #fff;
+    margin: 0px;
+    height: 105px;
+    line-height: 105px;
+    font-size: 20px;
+    @include pc-width {
+      height: 66px;
+      line-height: 66px;
+    }
+  }
+}
