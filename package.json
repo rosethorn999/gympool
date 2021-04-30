@@ -78,6 +78,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "deploy": "gsutil -m cp -r .\\build\\* gs://gympool.nodm.app",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
