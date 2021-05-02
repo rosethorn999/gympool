@@ -1,85 +1,91 @@
 import "../scss/Invitation.scss";
-import { useState } from "react";
 import Swal from "sweetalert2";
 import basicRequest from "../../../apis/api";
 import { open, close } from "../components/Spinner";
-function Accessory() {
-  const [email, setEmail] = useState("");
-  const [dirty, setDirty] = useState({ email: false });
-  const [invalidForm, setInvalidForm] = useState({ email: false });
+import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
 
-  function validForm() {
-    if (dirty.email === true) {
-      const regex = new RegExp(
-        "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$"
-      );
-      const v = !regex.test(email);
-      setInvalidForm({ email: v });
+function Invitation() {
+  const history = useHistory();
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
     }
-    return !invalidForm.email; // true=ok;false=ng
-  }
-  function requestInvitation() {
-    let isValid = validForm();
-    if (isValid) {
-      open();
-      let url = "/invitation/";
-      let o = { email };
 
-      basicRequest
-        .post(url, o)
-        .then(() => {
-          Swal.fire("完成", "認證信已經寄出", "success");
-        })
-        .catch((error) => {
-          const title = error.response.status.toString();
-          const msg = JSON.stringify(error.response.data);
-          Swal.fire(title, msg, "error");
-          console.error(error);
-        })
-        .finally(() => {
-          close();
+    return errors;
+  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      requestInvitation(values);
+    },
+  });
+
+  function requestInvitation(values) {
+    open();
+    let url = "/invitation/";
+
+    basicRequest
+      .post(url, values)
+      .then(() => {
+        Swal.fire(
+          "認證信已經寄出",
+          `請至 ${values.email} 點擊信中連結`,
+          "success"
+        ).then(() => {
+          history.push("/");
         });
-    }
+      })
+      .catch((error) => {
+        const title = error.response.status.toString();
+        const msg = JSON.stringify(error.response.data);
+        Swal.fire(title, msg, "error");
+        console.error(error);
+      })
+      .finally(() => {
+        close();
+      });
   }
-  function handleChange(event) {
-    switch (event.target.name) {
-      case "email":
-        setEmail(event.target.value.trim());
-        if (dirty.email === false) {
-          setDirty({ email: true });
-        } else {
-          validForm();
-        }
-        break;
-      default:
-        break;
-    }
-  }
+
   return (
     <div className="invitation">
       <div className="container">
-        <p>用電子郵件註冊</p>
-        <div className="form-group">
-          <input
-            name="email"
-            type="text"
-            className={`text-box ${invalidForm.email ? "is-invalid" : null}`}
-            placeholder="電子信箱"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="button-box">
-          <button
-            className="btn blue"
-            disabled={invalidForm.email}
-            onClick={requestInvitation}
-          >
-            送出
-          </button>
-        </div>
+        <form onSubmit={formik.handleSubmit}>
+          <p>用電子郵件註冊</p>
+          <div className="form-group">
+            <input
+              name="email"
+              className={`text-box ${
+                formik.errors.email ? "is-invalid" : null
+              }`}
+              placeholder="電子信箱"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+          </div>
+          <div className="button-box">
+            <button
+              type="submit"
+              className="btn blue"
+              disabled={!formik.isValid}
+            >
+              送出
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
 }
 
-export default Accessory;
+export default Invitation;

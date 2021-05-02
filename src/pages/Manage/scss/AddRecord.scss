@@ -1,0 +1,54 @@
+@import "../../scss/mixins";
+@import "../../scss/_variables";
+.AddRecord {
+  .container {
+    width: 100%;
+    padding: 50px 250px;
+  }
+
+  .block {
+    width: 100%;
+
+    background: #ffffff;
+    box-shadow: 0px 3px 6px #00000029;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    h3 {
+      color: #0350cc;
+    }
+    > div {
+      padding: 0px 180px;
+    }
+  }
+  .form-group {
+    width: 100%;
+    margin-bottom: 12px;
+    display: flex;
+    label {
+      text-align: right;
+      flex: 1;
+      min-width: 80px;
+      padding-right: 18px;
+    }
+    .control-box {
+      flex: 4;
+      width: 100%;
+      > div,
+      > input,
+      > select,
+      > textarea {
+        width: 100%;
+      }
+    }
+  }
+  .text-box {
+    &.is-invalid,
+    &.is-invalid:focus {
+      border-color: #dc3545;
+      outline: 0;
+    }
+  }
+  .button-box {
+    text-align: right;
+  }
+}

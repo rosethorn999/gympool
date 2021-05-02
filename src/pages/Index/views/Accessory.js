@@ -1,5 +1,5 @@
 function Accessory() {
-  return <div className="wip">Accessory</div>;
+  return <div>Accessory</div>;
 }
 
 export default Accessory;

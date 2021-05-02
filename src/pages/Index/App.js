@@ -15,6 +15,8 @@ import Notice from "./views/Notice";
 import Invitation from "./views/Invitation";
 import UserLogin from "./views/UserLogin";
 import ResetPassword from "./views/ResetPassword";
+import Register from "./views/Register";
+import PrivacyPolicy from "./views/PrivacyPolicy";
 
 import { Spinner } from "./components/Spinner";
 
@@ -36,8 +38,10 @@ function App() {
             <Route path="/recordDetail" component={RecordDetail} />
             <Route path="/notice" component={Notice} />
             <Route path="/invitation" component={Invitation} />
+            <Route path="/register" component={Register} />
             <Route path="/login" component={UserLogin} />
             <Route path="/resetPassword" component={ResetPassword} />
+            <Route path="/privacyPolicy" component={PrivacyPolicy} />
           </Switch>
         </div>
 
