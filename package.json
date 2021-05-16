@@ -24,6 +24,7 @@
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -78,7 +79,9 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "build:staging": "env-cmd -f .env.staging node scripts/build.js",
     "build": "node scripts/build.js",
+    "deploy:staging": "gsutil -m cp -r .\\build\\* gs://gympool-stg.nodm.app",
     "deploy": "gsutil -m cp -r .\\build\\* gs://gympool.nodm.app",
     "test": "node scripts/test.js"
   },
