@@ -9,6 +9,7 @@ import {
 import { useDispatch } from "react-redux";
 import { logout } from "../store/user";
 import store from "../store/index";
+import { ReactComponent as BrandIcon } from "../assets/logo.svg";
 
 function HeaderBar() {
   const dispatch = useDispatch();
@@ -69,9 +70,9 @@ function HeaderBar() {
       <div className="HeaderBar">
         <header>
           <div className="logo-area" onClick={goIndex}>
-            <b>
-              <Link to="/">GymPool</Link>
-            </b>
+            <BrandIcon id="brandIcon" />
+            &nbsp;
+            <Link to="/">GymPool</Link>
           </div>
           <div className="menu-area">
             <ul>

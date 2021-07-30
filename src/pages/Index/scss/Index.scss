@@ -15,6 +15,9 @@
 
     .mark {
       background: $grass-green;
+      min-width: 80px;
+      display: inline-block;
+      margin: 0rem 1rem;
     }
     p {
       margin-bottom: 16px;
@@ -36,23 +39,20 @@
         li {
           display: inline-block;
           margin: 20px;
-          margin-bottom: 80px;
+          margin-bottom: 40px;
           border-radius: 50%;
           width: 120px;
           height: 120px;
+          padding-top: 10px;
+          font-size: 16px;
+
           p {
             margin: 0px;
             padding: 0;
-            line-height: 120px;
-            font-size: 26px;
-            &:nth-child(2) {
-              font-size: 17px;
-              margin-top: -90px;
-            }
+            line-height: 30px;
           }
           a.area-btn {
-            padding: 2px 10px;
-            border: 1px solid #fff;
+            line-height: 30px;
             color: #dee2e6;
             &:hover {
               color: #fff;
@@ -60,16 +60,16 @@
           }
         }
         li:nth-child(1) {
-          border: 2px solid #aa0000;
+          border: 3px solid #b95252;
         }
         li:nth-child(2) {
-          border: 2px solid #e6c01e;
+          border: 3px solid #e4be1f;
         }
         li:nth-child(3) {
-          border: 2px solid $grass-green;
+          border: 3px solid $grass-green;
         }
         li:nth-child(4) {
-          border: 2px solid #5196e6;
+          border: 3px solid #2680ea;
         }
       }
     }
@@ -180,7 +180,7 @@
       .record-box {
         width: 100%;
         @include pc-width {
-          width: 298px;
+          width: 350px;
         }
       }
     }

@@ -12,6 +12,8 @@ function RecordBox(props) {
     expiry_date,
     monthly_rental,
     processing_fee,
+    modify_time,
+    view = 0,
     remark,
   } = props.r;
   const selection = {
@@ -26,6 +28,12 @@ function RecordBox(props) {
   };
   const yyyy_mm = () => {
     let d = new Date(expiry_date);
+    let yyyy = d.getFullYear();
+    let mm = d.getMonth() + 1;
+    return yyyy + "/" + mm + "月";
+  };
+  const yyyy_mm_modify_time = () => {
+    let d = new Date(modify_time);
     let yyyy = d.getFullYear();
     let mm = d.getMonth() + 1;
     return yyyy + "/" + mm + "月";
@@ -54,25 +62,26 @@ function RecordBox(props) {
         <img src={defaultBackground} alt="wg" />
       </div>
       <div className="text-box-left">
-        <p className="font-size-20">{title}</p>
-        <p className="font-size-18">
+        <p className="font-size-24">{title}</p>
+        <p className="font-size-14">
           {gym_typeCaption()} {store}
         </p>
-        <p className="dark-gray-text font-size-14">{max30Chr(remark)}</p>
+        <p id="remark" className="dark-gray-text font-size-14">
+          {max30Chr(remark)}
+        </p>
       </div>
       <div className="text-box-right">
-        <p className="gray-text font-size-20">轉讓費: ${processing_fee}</p>
-        <p className="gray-text font-size-20">月費: ${monthly_rental}/月</p>
+        <p className="font-size-24">NT ${monthly_rental} / 月</p>
         <div>
-          <p id="price" className="blue-text font-size-24">
-            NT ${price()}
-          </p>
-          <p id="expiry_date" className="gray-text font-size-20">
-            到期日: {yyyy_mm()}
-          </p>
+          <p className="font-size-14">到期日期: {yyyy_mm()}</p>
+          <div style={{ clear: "both" }}></div>
+        </div>
+        <div>
+          <p className="font-size-14">更新日期: {yyyy_mm_modify_time()}</p>
           <div style={{ clear: "both" }}></div>
         </div>
       </div>
+      <div className="view-count font-size-14">👁️ {view}</div>
     </div>
   );
 }
@@ -87,6 +96,7 @@ RecordBox.defaultProps = {
     monthly_rental: "",
     processing_fee: "",
     remark: "",
+    view: 0,
   },
 };
 RecordBox.propTypes = {

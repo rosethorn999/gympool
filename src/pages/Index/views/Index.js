@@ -26,7 +26,7 @@ function Index() {
 
     const isMobileWidth = window.innerWidth <= 480;
     let _page_size = isMobileWidth ? 7 : 15; // mobile show 7 items, pc 15 items
-    let url = "/record?page_size=" + _page_size;
+    let url = "/record/?page_size=" + _page_size;
     basicRequest.get(url).then((response) => {
       const { count, results } = response.data;
       setRecordCount(count);
@@ -34,7 +34,7 @@ function Index() {
     });
   }
   function getRecordByCounty() {
-    let url = "/group-by-county";
+    let url = "/group-by-county/";
 
     basicRequest.get(url).then((response) => {
       let list = response.data;
@@ -57,17 +57,16 @@ function Index() {
               有<span className="mark">{recordCount}</span>
               件刊登商品
             </p>
-            <p className="second-line">尋找你所在的城市</p>
             <div className="county-area">
               <ul className="circles">
                 {countyScatter.map((item) => {
                   return (
                     <li key={item.county}>
-                      <p>{item.count}件</p>
-                      <br />
                       <Link to="/record" className="area-btn">
                         {item.county}
                       </Link>
+                      <p>{item.count}</p>
+                      <p>件</p>
                     </li>
                   );
                 })}

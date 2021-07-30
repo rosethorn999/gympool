@@ -19,6 +19,7 @@ import Register from "./views/Register";
 import PrivacyPolicy from "./views/PrivacyPolicy";
 
 import { Spinner } from "./components/Spinner";
+import MobileNav from "./components/MobileNav";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <HeaderBar />
         <Spinner />
         <ScrollToTop />
+        <MobileNav />
 
         <div className="router-container">
           <Switch>

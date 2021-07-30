@@ -1,0 +1,31 @@
+@import "../../scss/mixins";
+@import "../../scss/_variables";
+
+.MobileNav {
+  .flex-container {
+    z-index: 1000;
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    background: #fff;
+    color: $gray;
+    a:visited {
+      color: $gray;
+    }
+    div {
+      text-align: center;
+      width: 33%;
+      height: $MobileNavHeight;
+      padding: 5px;
+      img {
+        border-radius: 50%;
+        width: 40px;
+      }
+    }
+    @include pc-width {
+      display: none;
+    }
+  }
+}
