@@ -10,7 +10,6 @@ import zipCode from "../assets/twZipCode.json";
 function Record() {
   const baseRecordUrl = "/record/";
   const history = useHistory();
-  const [recordCount, setRecordCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [pagination, setPagination] = useState({
     pageIndex: 1,
@@ -35,7 +34,7 @@ function Record() {
   };
   const [search] = useState("");
   const [fetchRecordUrl, setFetchRecordUrl] = useState(baseRecordUrl);
-
+  const [activeTab, setActiveTab] = useState("全部");
   useEffect(() => {
     readRecord();
   }, []);
@@ -85,9 +84,7 @@ function Record() {
 
   useEffect(() => {
     let ret = [];
-    let selectedDistricts = selection.zipCode.find(
-      (item) => item.name === filter.county
-    );
+    let selectedDistricts = selection.zipCode.find((item) => item.name === filter.county);
 
     if (selectedDistricts) {
       ret = selectedDistricts.districts;
@@ -105,8 +102,7 @@ function Record() {
     }
 
     basicRequest.get(fetchRecordUrl).then((response) => {
-      const { count, results, next, previous } = response.data;
-      setRecordCount(count);
+      const { results, next, previous } = response.data;
       setRecords(results);
       setPagination({
         pageIndex: pagination.pageIndex,
@@ -142,80 +138,55 @@ function Record() {
       </div>
       <div className="container">
         <div className="list-header">
-          <div className="query-counter">
-            <span id="record-count">筆數 {recordCount}</span>
+          <div className="search-bar">
+            <input type="text"></input>
+            <button
+              type="button"
+              className="search-button"
+              onClick={() => console.log("search button clicked")}
+            >
+              | 🔍
+            </button>
           </div>
           <div className="query-fun">
-            <select
-              className="filter"
-              name="gym_type"
-              defaultValue={filter.gym_type}
-              onChange={handleFilterChange}
-            >
-              <option value="">會籍</option>
-              {selection.gym_types.map((item) => {
-                return (
-                  <option key={item.val} value={item.val}>
-                    {item.name}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              className="filter"
-              name="county"
-              defaultValue={filter.county}
-              onChange={handleFilterChange}
-            >
-              <option value="">縣市</option>
-              {selection.zipCode.map((county) => {
-                return (
-                  <option key={county.name} value={county.name}>
-                    {county.name}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              className="filter"
-              name="district"
-              defaultValue={filter.district}
-              onChange={handleFilterChange}
-            >
-              <option value="">行政區</option>
-              {districts.map((district) => {
-                return (
-                  <option key={district.name} value={district.name}>
-                    {district.name}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              className="sorter"
-              name="create_time"
-              defaultValue={ordering.create_time}
-              onChange={handleSorterChange}
-            >
-              <option value="" disabled>
-                建立日期
-              </option>
-              <option value="">新到舊</option>
-              <option value>舊到新</option>
-            </select>
-            <select
-              className="sorter"
-              name="monthly_rental"
-              defaultValue={ordering.monthly_rental}
-              onChange={handleSorterChange}
-            >
-              <option value="" disabled>
-                月費
-              </option>
-              {/* TODO price(server side calculated) not monthly_rental */}
-              <option value="-">高到低</option>
-              <option value>低到高</option>
-            </select>
+            <ul className="country-tab-container">
+              <li
+                className={`country-tab ${activeTab === "全部" ? "active" : ""}`}
+                onClick={() => setActiveTab("全部")}
+              >
+                全部
+              </li>
+              <li
+                className={`country-tab ${activeTab === "臺北" ? "active" : ""}`}
+                onClick={() => setActiveTab("臺北")}
+              >
+                臺北
+              </li>
+              <li
+                className={`country-tab ${activeTab === "新北" ? "active" : ""}`}
+                onClick={() => setActiveTab("新北")}
+              >
+                新北
+              </li>
+              <li
+                className={`country-tab ${activeTab === "臺中" ? "active" : ""}`}
+                onClick={() => setActiveTab("臺中")}
+              >
+                臺中
+              </li>
+              <li
+                className={`country-tab ${activeTab === "臺南" ? "active" : ""}`}
+                onClick={() => setActiveTab("臺南")}
+              >
+                臺南
+              </li>
+              <li
+                className={`country-tab ${activeTab === "高雄" ? "active" : ""}`}
+                onClick={() => setActiveTab("高雄")}
+              >
+                高雄
+              </li>
+            </ul>
           </div>
         </div>
         <div className="record-container">
@@ -229,22 +200,14 @@ function Record() {
             <div>無資料</div>
           ) : (
             records.map((r, i) => {
-              return (
-                <RecordBox key={r.id} r={r} handleClick={(o) => checkout(i)} />
-              );
+              return <RecordBox key={r.id} r={r} handleClick={(o) => checkout(i)} />;
             })
           )}
           <div className="pagination-block">
-            <button
-              className="pagination-btn"
-              onClick={() => setCurrentPage(currentPage - 1)}
-            >
+            <button className="pagination-btn" onClick={() => setCurrentPage(currentPage - 1)}>
               上一頁
             </button>
-            <button
-              className="pagination-btn"
-              onClick={() => setCurrentPage(currentPage + 1)}
-            >
+            <button className="pagination-btn" onClick={() => setCurrentPage(currentPage + 1)}>
               下一頁
             </button>
           </div>

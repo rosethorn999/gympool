@@ -2,7 +2,7 @@
 @import "../../scss/_variables";
 
 .records {
-  background: #f5f7f8;
+  background: $white-smoke;
   width: 100%;
 
   .container {
@@ -13,6 +13,8 @@
     }
   }
   .you-should-know {
+    display: none;
+
     box-sizing: border-box;
     height: 307px;
     background-image: url("../assets/bg.png");
@@ -20,6 +22,7 @@
     padding: 60px $phone-padding 150px;
     width: 100%;
     @include pc-width {
+      display: block;
       padding: 52px $pc-padding;
     }
     p {
@@ -53,16 +56,53 @@
       vertical-align: middle;
       display: inline-block;
     }
-    .query-counter {
-      font-size: 24px;
+    .search-bar {
+      input {
+        border: $whisper solid 1px;
+        border-radius: 40px;
+        height: 40px;
+        padding-left: 20px;
+        font-size: 20px;
+        width: 100%;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      .search-button {
+        padding-right: 10px;
+        cursor: pointer;
+        line-height: 50px;
+        color: $whisper;
+        font-size: 20px;
+        float: right;
+        background-color: transparent;
+        height: 40px;
+        border: none;
+        right: 0;
+        position: absolute;
+      }
+      position: relative;
       @include pc-width {
         flex: 1;
       }
     }
     .query-fun {
-      text-align: right;
       overflow: auto;
       white-space: nowrap;
+      .country-tab-container {
+        list-style-type: none;
+      }
+      .country-tab {
+        display: inline-block;
+        text-align: center;
+        padding: 0px 10px;
+        cursor: pointer;
+        &.active {
+          background-color: $whisper;
+          color: red;
+        }
+      }
+
       @include pc-width {
         flex: 2;
       }

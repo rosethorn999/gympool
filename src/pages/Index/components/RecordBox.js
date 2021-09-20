@@ -11,20 +11,12 @@ function RecordBox(props) {
     gym_type,
     expiry_date,
     monthly_rental,
-    processing_fee,
     modify_time,
     view = 0,
     remark,
   } = props.r;
   const selection = {
     gym_types: selections[0].list,
-  };
-  const price = () => {
-    let d = new Date(expiry_date).getTime();
-    let now = new Date().getTime();
-
-    const monthCount = Math.round((d - now) / 1000 / 60 / 60 / 24 / 30);
-    return monthly_rental * monthCount + processing_fee;
   };
   const yyyy_mm = () => {
     let d = new Date(expiry_date);

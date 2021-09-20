@@ -6,7 +6,7 @@
     position: sticky;
     top: 0px;
     z-index: 10;
-    background: $red;
+    background: $persian-red;
     display: flex;
     width: 100%;
     overflow: auto;
@@ -24,7 +24,7 @@
     height: 100%;
     line-height: 67px;
     width: 50%;
-    background: $red;
+    background: $persian-red;
     text-align: left;
     font-size: 28px;
     transition: 0.4s;
@@ -79,7 +79,7 @@
       vertical-align: middle;
       background-color: #fff;
       border: 0px;
-      outline: 1px solid $gray;
+      outline: 1px solid $white-smoke;
       outline-offset: 0px;
     }
     .search-text-box {
@@ -87,7 +87,7 @@
       height: 34px;
       vertical-align: middle;
       max-width: calc(100% - 10rem);
-      border: 1px solid $gray;
+      border: 1px solid $white-smoke;
     }
     .search-btn {
       display: inline-block;
@@ -110,7 +110,7 @@
       display: inline-block;
       a {
         margin: 0px 10px;
-        color: $red;
+        color: $persian-red;
         text-decoration: none;
       }
     }
@@ -147,7 +147,7 @@
     z-index: 1;
     top: 66px;
     left: 0;
-    background-color: $red;
+    background-color: $persian-red;
     overflow-y: hidden;
     transition: 0.5s;
     &.open {
@@ -161,33 +161,6 @@
       padding: 0px 20px;
     }
 
-    .search-bar-mobile {
-      width: 100%;
-      .search-select {
-        display: inline-block;
-        height: 32px;
-        width: 5rem;
-        vertical-align: middle;
-        background-color: #fff;
-        border: 0px;
-        outline: 1px solid $gray;
-        outline-offset: 0px;
-      }
-      .search-text-box {
-        display: inline-block;
-        height: 34px;
-        vertical-align: middle;
-        max-width: calc(100% - 10rem);
-        border: 1px solid $gray;
-      }
-      .search-btn {
-        display: inline-block;
-        vertical-align: middle;
-        width: 4rem;
-        padding: 0px;
-        margin-right: 0px;
-      }
-    }
     ul {
       margin-bottom: 2em;
     }

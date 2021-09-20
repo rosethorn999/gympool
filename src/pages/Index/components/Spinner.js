@@ -33,7 +33,7 @@ function createLayer() {
     body.removeChild(overlayDivOld);
   }
   let overlayDiv = document.createElement("div");
-  let background = "#f00034";
+  let background = "#e52525";
   overlayDiv.id = "overlayDiv";
   overlayDiv.style = `z-index:99997;
       position:fixed;

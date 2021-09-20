@@ -79,14 +79,6 @@ function HeaderBar() {
               <li>
                 <Link to="/record">健身房會籍轉讓</Link>
               </li>
-              |
-              <li>
-                <Link to="/accessory">配件</Link>
-              </li>
-              |
-              <li>
-                <Link to="/article">文章</Link>
-              </li>
             </ul>
           </div>
           <div className="search-bar">
@@ -145,20 +137,6 @@ function HeaderBar() {
           </div>
           <div className={`overlay ${mobileOverlayHeight}`}>
             <div className="overlay-content">
-              <div className="search-bar-mobile">
-                <select className="search-select">
-                  <option value="1">標題</option>
-                </select>
-                <input
-                  name="search"
-                  type="text"
-                  className="search-text-box"
-                  onChange={handleChange}
-                />
-                <button className="btn search-btn" onClick={goRecords}>
-                  查詢
-                </button>
-              </div>
               {isLoggedIn ? (
                 <ul>
                   <li>
@@ -187,12 +165,6 @@ function HeaderBar() {
               <ul>
                 <li>
                   <Link to="/record">健身房會籍轉讓</Link>
-                </li>
-                <li>
-                  <Link to="/accessory">配件</Link>
-                </li>
-                <li>
-                  <Link to="/article">文章</Link>
                 </li>
               </ul>
             </div>
