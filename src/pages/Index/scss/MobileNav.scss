@@ -10,9 +10,13 @@
     flex-flow: row wrap;
     width: 100%;
     background: #fff;
-    color: $white-smoke;
-    a:visited {
-      color: $white-smoke;
+    color: $charcoal;
+    font-size: 14px;
+    a {
+      &:visited,
+      &:active {
+        color: $charcoal;
+      }
     }
     div {
       text-align: center;

@@ -63,7 +63,7 @@
   .image-block {
     display: none;
     @include pc-width {
-      border: 1px solid #707070;
+      border: 1px solid $whisper;
       min-width: 150px;
       overflow: hidden;
       display: block;

@@ -99,7 +99,7 @@
         cursor: pointer;
         &.active {
           background-color: $whisper;
-          color: red;
+          color: $persian-red;
         }
       }
 
@@ -123,7 +123,7 @@
         cursor: pointer;
         margin: 0px 10px;
         padding: 10px 25px;
-        border: 1px solid #707070;
+        border: 1px solid $whisper;
         color: #0058e5;
         @include pc-width {
           margin: 0px 50px;

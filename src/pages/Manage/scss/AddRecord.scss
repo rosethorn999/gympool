@@ -44,7 +44,7 @@
   .text-box {
     &.is-invalid,
     &.is-invalid:focus {
-      border-color: #dc3545;
+      border-color: $bloodred;
       outline: 0;
     }
   }

@@ -20,18 +20,22 @@
     display: block;
   }
   .text-box {
-    padding: 10px;
-    border: 1px solid #707070;
+    padding: 20px;
+    border: 1px solid $whisper;
     margin-bottom: 40px;
     width: 30%;
     min-width: 250px;
-    height: 57px;
-    line-height: 57px;
+    height: 40px;
+    line-height: 40px;
     display: block;
     margin: 0px auto;
+    border-radius: 57px;
+    &:focus-visible {
+      outline: none;
+    }
     &.is-invalid,
     &.is-invalid:focus {
-      border-color: #dc3545;
+      border-color: $bloodred;
       outline: 0;
     }
   }
