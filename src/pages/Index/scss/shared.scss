@@ -21,7 +21,7 @@ ul {
   cursor: pointer;
 
   &.blue {
-    background: $blue;
+    background: $dodger-blue;
     color: #fff;
   }
   &.pink {
@@ -53,6 +53,10 @@ ul {
   display: block;
   margin: 0px auto;
   border-radius: 57px;
+  &:focus {
+    border-color: $maya-blue;
+    box-shadow: 0 0 0 0.25rem $dodger-blue-with-25opacity;
+  }
   &:focus-visible {
     outline: none;
   }

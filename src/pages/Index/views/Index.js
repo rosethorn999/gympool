@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { HashRouter as Router, Link, useHistory } from "react-router-dom";
 import RecordBox from "../components/RecordBox";
 import basicRequest from "../../../apis/api";
+import icon_featEasyContact from "../assets/feat-easy-contact.png";
+import icon_featFree from "../assets/feat-free.png";
+import icon_featClearInfo from "../assets/feat-clear-info.png";
+import icon_featDiversityProd from "../assets/feat-diversity-prod.png";
 
 function Index() {
   const history = useHistory();
@@ -87,19 +91,19 @@ function Index() {
           <div>
             <ul>
               <li>
-                <img src="https://via.placeholder.com/90" alt="contactEasily" />
+                <img src={icon_featEasyContact} alt="contactEasily" />
                 <p>方便聯絡</p>
               </li>
               <li>
-                <img src="https://via.placeholder.com/90" alt="free" />
+                <img src={icon_featFree} alt="free" />
                 <p>完全免費</p>
               </li>
               <li>
-                <img src="https://via.placeholder.com/90" alt="clear" />
+                <img src={icon_featClearInfo} alt="clear" />
                 <p>資訊透明</p>
               </li>
               <li>
-                <img src="https://via.placeholder.com/90" alt="manyProduct" />
+                <img src={icon_featDiversityProd} alt="manyProduct" />
                 <p>多樣商品</p>
               </li>
             </ul>

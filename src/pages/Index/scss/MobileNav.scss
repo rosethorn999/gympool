@@ -13,9 +13,13 @@
     color: $charcoal;
     font-size: 14px;
     a {
+      opacity: 0.5;
       &:visited,
       &:active {
         color: $charcoal;
+      }
+      &.active {
+        opacity: 1;
       }
     }
     div {
