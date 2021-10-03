@@ -41,13 +41,25 @@ function Record() {
 
   useEffect(() => {
     readRecord();
+  }, [fetchRecordUrl]);
+
+  useEffect(() => {
+    readRecord();
   }, [currentPage]);
 
   useEffect(() => {
+    prepareFetchUrl();
+  }, [currentPage, pagination.pageIndex, search, activeTab]);
+
+  function prepareFetchUrl() {
     let url = baseRecordUrl;
+    let urlSearch = new URLSearchParams();
 
     // filter
-    let urlSearch = new URLSearchParams();
+    if (activeTab !== "全部") {
+      urlSearch.set("county", activeTab + "市");
+    }
+
     // pagination
     if (typeof currentPage === "number") {
       if (pagination.pageIndex !== 0) {
@@ -61,17 +73,17 @@ function Record() {
     }
 
     // ordering
-    let ordering = [];
+    let tempOrdering = [];
     let orderingCreate_time = ordering.create_time;
     if (orderingCreate_time !== null) {
-      ordering.push(orderingCreate_time + "create_time");
+      tempOrdering.push(orderingCreate_time + "create_time");
     }
     let orderingMonthly_rental = ordering.monthly_rental;
     if (orderingMonthly_rental !== null) {
-      ordering.push(orderingMonthly_rental + "monthly_rental");
+      tempOrdering.push(orderingMonthly_rental + "monthly_rental");
     }
     if (ordering.length > 0) {
-      urlSearch.set("ordering", ordering);
+      urlSearch.set("ordering", tempOrdering);
     }
 
     let queries = urlSearch.toString();
@@ -80,7 +92,7 @@ function Record() {
     }
 
     setFetchRecordUrl(url);
-  }, [currentPage, pagination.pageIndex, search]);
+  }
 
   useEffect(() => {
     let ret = [];
