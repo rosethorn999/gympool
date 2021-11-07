@@ -66,7 +66,7 @@ function Index() {
                 {countyScatter.map((item) => {
                   return (
                     <li key={item.county}>
-                      <Link to="/record" className="area-btn">
+                      <Link to={"/record?activeTab=" + item.county} className="area-btn">
                         {item.county}
                       </Link>
                       <p>{item.count}</p>

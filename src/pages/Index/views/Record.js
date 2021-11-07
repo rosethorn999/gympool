@@ -1,6 +1,7 @@
 import "../scss/Record.scss";
+import React from "react";
 import { useState, useEffect } from "react";
-import { HashRouter as Router, Link, useHistory } from "react-router-dom";
+import { HashRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
 import RecordBox from "../components/RecordBox";
 import loadingGif from "../assets/loading.gif";
 import basicRequest from "../../../apis/api";
@@ -9,6 +10,7 @@ import zipCode from "../assets/twZipCode.json";
 
 function Record() {
   const baseRecordUrl = "/record/";
+  const municipalities = ["臺北", "新北", "臺中", "臺南", "高雄"];
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(0);
   const [pagination, setPagination] = useState({
@@ -32,10 +34,16 @@ function Record() {
     zipCode,
     gym_types: selections[0].list,
   };
-  const [search] = useState("");
+  const [searchBarText] = useState("");
   const [fetchRecordUrl, setFetchRecordUrl] = useState(baseRecordUrl);
   const [activeTab, setActiveTab] = useState("全部");
+  let query = useQuery();
+
   useEffect(() => {
+    const activeTabValue = query.get("activeTab")?.substr(0, 2);
+    if (municipalities.includes(activeTabValue)) {
+      setActiveTab(activeTabValue);
+    }
     readRecord();
   }, []);
 
@@ -49,7 +57,11 @@ function Record() {
 
   useEffect(() => {
     prepareFetchUrl();
-  }, [currentPage, pagination.pageIndex, search, activeTab]);
+  }, [currentPage, pagination.pageIndex, searchBarText, activeTab]);
+  function useQuery() {
+    const { search } = useLocation();
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
 
   function prepareFetchUrl() {
     let url = baseRecordUrl;
@@ -67,9 +79,9 @@ function Record() {
       }
     }
 
-    // search
-    if (search) {
-      urlSearch.set("search", search);
+    // searchBarText
+    if (searchBarText) {
+      urlSearch.set("search", searchBarText);
     }
 
     // ordering
@@ -162,42 +174,17 @@ function Record() {
           </div>
           <div className="query-fun">
             <ul className="country-tab-container">
-              <li
-                className={`country-tab ${activeTab === "全部" ? "active" : ""}`}
-                onClick={() => setActiveTab("全部")}
-              >
-                全部
-              </li>
-              <li
-                className={`country-tab ${activeTab === "臺北" ? "active" : ""}`}
-                onClick={() => setActiveTab("臺北")}
-              >
-                臺北
-              </li>
-              <li
-                className={`country-tab ${activeTab === "新北" ? "active" : ""}`}
-                onClick={() => setActiveTab("新北")}
-              >
-                新北
-              </li>
-              <li
-                className={`country-tab ${activeTab === "臺中" ? "active" : ""}`}
-                onClick={() => setActiveTab("臺中")}
-              >
-                臺中
-              </li>
-              <li
-                className={`country-tab ${activeTab === "臺南" ? "active" : ""}`}
-                onClick={() => setActiveTab("臺南")}
-              >
-                臺南
-              </li>
-              <li
-                className={`country-tab ${activeTab === "高雄" ? "active" : ""}`}
-                onClick={() => setActiveTab("高雄")}
-              >
-                高雄
-              </li>
+              {["全部", ...municipalities].map((o, i) => {
+                return (
+                  <li
+                    key={o}
+                    className={`country-tab ${activeTab === o ? "active" : ""}`}
+                    onClick={() => setActiveTab(o)}
+                  >
+                    {o}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
