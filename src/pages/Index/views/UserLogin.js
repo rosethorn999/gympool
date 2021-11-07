@@ -15,9 +15,7 @@ function UserLogin() {
 
     if (!values.email) {
       errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid email address";
     }
     if (!values.password) {
@@ -52,7 +50,13 @@ function UserLogin() {
       })
       .catch(function (error) {
         const title = error.response.status.toString();
-        const msg = JSON.stringify(error.response.data);
+        let msg = JSON.stringify(error.response.data);
+        if (error.response.status === 400) {
+          msg = error.response.data.non_field_errors?.[0].replace(
+            "Unable to log in with provided credentials.",
+            "無法使用此帳號密碼登入"
+          );
+        }
         Swal.fire(title, msg, "error");
         console.error(error);
       })
@@ -69,9 +73,7 @@ function UserLogin() {
           <div className="form-group">
             <input
               name="email"
-              className={`text-box ${
-                formik.errors.email ? "is-invalid" : null
-              }`}
+              className={`text-box ${formik.errors.email ? "is-invalid" : null}`}
               placeholder="電子信箱"
               onChange={formik.handleChange}
               value={formik.values.email}
@@ -81,9 +83,7 @@ function UserLogin() {
             <input
               name="password"
               type="password"
-              className={`text-box ${
-                formik.errors.password ? "is-invalid" : null
-              }`}
+              className={`text-box ${formik.errors.password ? "is-invalid" : null}`}
               placeholder="密碼"
               onChange={formik.handleChange}
               value={formik.values.password}
@@ -97,11 +97,7 @@ function UserLogin() {
             </Router>
           </div>
           <div className="button-box">
-            <button
-              type="submit"
-              className="btn blue"
-              disabled={!formik.isValid}
-            >
+            <button type="submit" className="btn blue" disabled={!formik.isValid}>
               送出
             </button>
           </div>

@@ -13,9 +13,7 @@ function Invitation() {
 
     if (!values.email) {
       errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid email address";
     }
 
@@ -38,17 +36,19 @@ function Invitation() {
     basicRequest
       .post(url, values)
       .then(() => {
-        Swal.fire(
-          "認證信已經寄出",
-          `請至 ${values.email} 點擊信中連結`,
-          "success"
-        ).then(() => {
+        Swal.fire("認證信已經寄出", `請至 ${values.email} 點擊信中連結`, "success").then(() => {
           history.push("/");
         });
       })
       .catch((error) => {
         const title = error.response.status.toString();
-        const msg = JSON.stringify(error.response.data);
+        let msg = JSON.stringify(error.response.data);
+        if (error.response.status === 400) {
+          msg = error.response.data?.detail.replace(
+            "had been registered as a user.",
+            "已經註冊過了, 請登入"
+          );
+        }
         Swal.fire(title, msg, "error");
         console.error(error);
       })
@@ -65,9 +65,7 @@ function Invitation() {
           <div className="form-group">
             <input
               name="email"
-              className={`text-box ${
-                formik.errors.email ? "is-invalid" : null
-              }`}
+              className={`text-box ${formik.errors.email ? "is-invalid" : null}`}
               placeholder="電子信箱"
               onChange={formik.handleChange}
               value={formik.values.email}

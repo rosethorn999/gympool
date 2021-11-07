@@ -12,9 +12,7 @@ function ResetPassword() {
 
     if (!values.email) {
       errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid email address";
     }
     if (!values.sn) {
@@ -45,7 +43,13 @@ function ResetPassword() {
       })
       .catch(function (error) {
         const title = error.response.status.toString();
-        const msg = JSON.stringify(error.response.data);
+        let msg = JSON.stringify(error.response.data);
+        if (error.response.status === 403) {
+          msg = error.response.data.replace(
+            "Unable to get user with provided credentials.",
+            "無法找到該名使用者"
+          );
+        }
         Swal.fire(title, msg, "error");
         console.error(error);
       });
@@ -61,9 +65,7 @@ function ResetPassword() {
           <div className="form-group">
             <input
               name="email"
-              className={`text-box ${
-                formik.errors.email ? "is-invalid" : null
-              }`}
+              className={`text-box ${formik.errors.email ? "is-invalid" : null}`}
               placeholder="電子信箱"
               onChange={formik.handleChange}
               value={formik.values.email}
@@ -83,11 +85,7 @@ function ResetPassword() {
             <button className="btn blue" onClick={goBack}>
               回上一頁
             </button>
-            <button
-              type="submit"
-              className="btn blue"
-              disabled={!formik.isValid}
-            >
+            <button type="submit" className="btn blue" disabled={!formik.isValid}>
               送出
             </button>
           </div>
