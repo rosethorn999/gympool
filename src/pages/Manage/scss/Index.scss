@@ -57,7 +57,7 @@
             position: relative;
             overflow: hidden;
             p {
-              z-index: 10;
+              z-index: $Z-INDEX-MODAL + 10;
               position: absolute;
               background: $pink;
               padding: 10px;
@@ -104,7 +104,7 @@
   .dropdown-menu {
     display: none;
     position: absolute;
-    z-index: 1000;
+    z-index: $Z-INDEX-DROPDOWN-MENU;
     min-width: 7rem;
     padding: 0.5rem 0;
     margin: 0.125rem 0 0;

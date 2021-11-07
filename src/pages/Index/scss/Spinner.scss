@@ -1,5 +1,7 @@
+@import "../../scss/_variables";
+
 #react-spinner {
-  z-index: 99999;
+  z-index: $Z-INDEX-SPINNER;
   position: fixed;
   width: 200px;
   height: 200px;

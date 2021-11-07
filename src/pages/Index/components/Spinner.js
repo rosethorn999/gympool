@@ -35,7 +35,7 @@ function createLayer() {
   let overlayDiv = document.createElement("div");
   let background = "#e52525";
   overlayDiv.id = "overlayDiv";
-  overlayDiv.style = `z-index:99997;
+  overlayDiv.style = `z-index:497;
       position:fixed;
       width:100%;height:100%;
       background:${background};

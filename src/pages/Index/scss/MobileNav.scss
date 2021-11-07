@@ -3,7 +3,7 @@
 
 .MobileNav {
   .flex-container {
-    z-index: 1000;
+    z-index: $Z-INDEX-MOBILE-NAV;
     position: fixed;
     bottom: 0px;
     display: flex;
