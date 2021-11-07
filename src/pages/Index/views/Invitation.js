@@ -2,7 +2,7 @@ import "../scss/Invitation.scss";
 import Swal from "sweetalert2";
 import basicRequest from "../../../apis/api";
 import { open, close } from "../components/Spinner";
-import { useHistory } from "react-router-dom";
+import { HashRouter as Router, Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 
 function Invitation() {
@@ -73,12 +73,15 @@ function Invitation() {
               value={formik.values.email}
             />
           </div>
+          <div className="form-group">
+            <Router>
+              <p>
+                <Link to="/login">已有帳號? 直接登入</Link>
+              </p>
+            </Router>
+          </div>
           <div className="button-box">
-            <button
-              type="submit"
-              className="btn blue"
-              disabled={!formik.isValid}
-            >
+            <button type="submit" className="btn blue" disabled={!formik.isValid}>
               送出
             </button>
           </div>
