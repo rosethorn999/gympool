@@ -272,7 +272,7 @@ function Record() {
                         const county = e.target.value;
                         let ret = [];
                         let selectedDistricts = selection.zipCode.filter((item) => {
-                            return item.name === county;
+                          return item.name === county;
                         });
 
                         if (selectedDistricts.length > 0) {
@@ -324,7 +324,7 @@ function Record() {
                   </div>
                 </div>
               </div>
-              <div className="block">
+              {/* <div className="block">
                 <h3>店家資料</h3>
                 <div className="form-group">
                   <label>場館特色</label>
@@ -361,7 +361,7 @@ function Record() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="block">
                 <h3>其他費用</h3>
                 <div className="form-group">

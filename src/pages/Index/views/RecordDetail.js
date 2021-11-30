@@ -94,7 +94,7 @@ function RecordDetail() {
                 所在地: {county}
                 {district}
               </p>
-              <p>
+              {/* <p>
                 場館特色:{" "}
                 {selection.features.map(
                   (o) =>
@@ -102,7 +102,7 @@ function RecordDetail() {
                       <span key={o.val}>{o.name} </span>
                     )
                 )}
-              </p>
+              </p> */}
               <p>賣家資訊: {creator}</p>
               <h3>&nbsp;</h3>
               <h1>
