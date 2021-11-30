@@ -5,9 +5,7 @@ import { HashRouter as Router, Link, useHistory } from "react-router-dom";
 function RecordDetail() {
   const history = useHistory();
 
-  let record = sessionStorage.getItem("record")
-    ? JSON.parse(sessionStorage.getItem("record"))
-    : {};
+  let record = sessionStorage.getItem("record") ? JSON.parse(sessionStorage.getItem("record")) : {};
   const {
     title,
     gym_type,
@@ -64,11 +62,7 @@ function RecordDetail() {
         <div className="record-container">
           <div className="upper-box">
             <div className="left-box">
-              <img
-                className="main-image"
-                src="https://via.placeholder.com/583x334"
-                alt="xxx"
-              />
+              <img className="main-image" src="https://via.placeholder.com/583x334" alt="mainPic" />
               <div className="img-box">
                 <img src="https://via.placeholder.com/105x60" alt="img" />
                 <img src="https://via.placeholder.com/105x60" alt="img" />

@@ -16,17 +16,13 @@ function Register() {
     if (!values.invitation_id) {
       errors.invitation_id = "Required";
     } else if (
-      !/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/i.test(
-        values.invitation_id
-      )
+      !/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/i.test(values.invitation_id)
     ) {
       errors.invitation_id = "Invalid invitation_id";
     }
     if (!values.email) {
       errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid email address";
     }
     if (!values.username) {
@@ -88,9 +84,28 @@ function Register() {
         });
       })
       .catch(function (error) {
+        let msgs = [];
+        if (error.response.status === 400) {
+          let msg = error.response.data;
+          const keys = Object.keys(msg);
+          const commonMsg = {
+            "This password is too common.": "密碼太過於常見",
+            "This password is entirely numeric.": "密碼需由數字與英文組成",
+            "user with this username already exists.": "此使用者名稱已被註冊",
+            "invitation not exist.": "連結錯誤 請重開邀請信中連結",
+          };
+          keys.forEach((key) => {
+            msg[key].forEach((msg) => {
+              msgs.push(commonMsg[msg] || msg);
+            });
+          });
+        }
         const title = error.response.status.toString();
-        const msg = JSON.stringify(error.response.data);
-        Swal.fire(title, msg, "error");
+        if (msgs.length > 0) {
+          Swal.fire(title, msgs.join("<br>"), "error");
+        } else {
+          Swal.fire(title, JSON.stringify(error.response.data), "error");
+        }
         console.error(error);
       })
       .finally(() => {
@@ -108,9 +123,7 @@ function Register() {
             <div className="form-group">
               <input
                 name="email"
-                className={`text-box ${
-                  formik.errors.email ? "is-invalid" : null
-                }`}
+                className={`text-box ${formik.errors.email ? "is-invalid" : null}`}
                 placeholder="電子信箱"
                 onChange={formik.handleChange}
                 value={formik.values.email}
@@ -120,9 +133,7 @@ function Register() {
               <input
                 name="username"
                 type="text"
-                className={`text-box ${
-                  formik.errors.username ? "is-invalid" : null
-                }`}
+                className={`text-box ${formik.errors.username ? "is-invalid" : null}`}
                 placeholder="使用者名稱"
                 onChange={formik.handleChange}
                 value={formik.values.username}
@@ -132,9 +143,7 @@ function Register() {
               <input
                 name="password"
                 type="password"
-                className={`text-box ${
-                  formik.errors.password ? "is-invalid" : null
-                }`}
+                className={`text-box ${formik.errors.password ? "is-invalid" : null}`}
                 placeholder="密碼"
                 onChange={formik.handleChange}
                 value={formik.values.password}
@@ -144,9 +153,7 @@ function Register() {
               <input
                 name="password2"
                 type="password"
-                className={`text-box ${
-                  formik.errors.password ? "is-invalid" : null
-                }`}
+                className={`text-box ${formik.errors.password ? "is-invalid" : null}`}
                 placeholder="確認密碼"
                 onChange={formik.handleChange}
                 value={formik.values.password2}
@@ -166,9 +173,7 @@ function Register() {
               <input
                 name="last_name"
                 type="text"
-                className={`text-box ${
-                  formik.errors.last_name ? "is-invalid" : null
-                }`}
+                className={`text-box ${formik.errors.last_name ? "is-invalid" : null}`}
                 placeholder="姓"
                 onChange={formik.handleChange}
                 value={formik.values.last_name}
@@ -178,9 +183,7 @@ function Register() {
               <input
                 name="first_name"
                 type="text"
-                className={`text-box ${
-                  formik.errors.first_name ? "is-invalid" : null
-                }`}
+                className={`text-box ${formik.errors.first_name ? "is-invalid" : null}`}
                 placeholder="名"
                 onChange={formik.handleChange}
                 value={formik.values.first_name}
@@ -188,19 +191,14 @@ function Register() {
             </div>
 
             <div className="form-group">
-              要深入了解 GymPool 如何收集、使用、分享及保護你的個人資料，請詳閱
-              GymPool 的
+              要深入了解 GymPool 如何收集、使用、分享及保護你的個人資料，請詳閱 GymPool 的
               <a href="#/privacyPolicy" target="_blank" rel="noreferrer">
                 隱私權政策
               </a>
             </div>
 
             <div className="button-box">
-              <button
-                type="submit"
-                className="btn blue"
-                disabled={!formik.isValid}
-              >
+              <button type="submit" className="btn blue" disabled={!formik.isValid}>
                 送出
               </button>
             </div>

@@ -23,11 +23,7 @@ function Record() {
   const recordInSession = sessionStorage.getItem("record");
   let record = recordInSession ? JSON.parse(recordInSession) : {};
   useEffect(() => {
-    record.price = calcPrice(
-      record.monthly_rental,
-      record.expiry_date,
-      record.processing_fee
-    );
+    record.price = calcPrice(record.monthly_rental, record.expiry_date, record.processing_fee);
   }, [record]);
 
   function calcPrice(monthly_rental, expiry_date, processing_fee) {
@@ -107,6 +103,7 @@ function Record() {
       expiry_date,
       gym_type,
       features,
+      inventory,
     }) => ({
       monthly_rental,
       title,
@@ -118,8 +115,9 @@ function Record() {
       expiry_date,
       gym_type,
       features,
+      inventory,
     }))(values);
-    let url = "/record/" + this.id + "/";
+    let url = "/record/" + values.id + "/";
 
     basicRequest
       .patch(url, o)
@@ -188,9 +186,7 @@ function Record() {
                       type="text"
                       id="title"
                       name="title"
-                      className={`text-box ${
-                        errors.title ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.title ? "is-invalid" : null}`}
                     />
                   </div>
                 </div>
@@ -204,9 +200,7 @@ function Record() {
                       id="price"
                       name="price"
                       type="number"
-                      className={`text-box ${
-                        errors.price ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.price ? "is-invalid" : null}`}
                       disabled
                       value={price}
                     />
@@ -219,19 +213,13 @@ function Record() {
                       id="monthly_rental"
                       type="number"
                       name="monthly_rental"
-                      className={`text-box ${
-                        errors.monthly_rental ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.monthly_rental ? "is-invalid" : null}`}
                       value={values.monthly_rental}
                       onChange={(e) => {
                         const monthly_rental = Number(e.target.value);
                         setFieldValue("monthly_rental", monthly_rental);
 
-                        calcPrice(
-                          monthly_rental,
-                          values.expiry_date,
-                          values.processing_fee
-                        );
+                        calcPrice(monthly_rental, values.expiry_date, values.processing_fee);
                       }}
                     />
                   </div>
@@ -243,9 +231,7 @@ function Record() {
                       as="select"
                       id="gym_type"
                       name="gym_type"
-                      className={`text-box ${
-                        errors.monthly_rental ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.monthly_rental ? "is-invalid" : null}`}
                       value={values.gym_type}
                     >
                       <option value="-1" disabled>
@@ -268,9 +254,7 @@ function Record() {
                       id="store"
                       type="text"
                       name="store"
-                      className={`text-box ${
-                        errors.store ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.store ? "is-invalid" : null}`}
                       value={values.store}
                     />
                   </div>
@@ -282,18 +266,14 @@ function Record() {
                       as="select"
                       id="county"
                       name="county"
-                      className={`text-box ${
-                        errors.county ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.county ? "is-invalid" : null}`}
                       value={values.county}
                       onChange={(e) => {
                         const county = e.target.value;
                         let ret = [];
-                        let selectedDistricts = selection.zipCode.filter(
-                          (item) => {
+                        let selectedDistricts = selection.zipCode.filter((item) => {
                             return item.name === county;
-                          }
-                        );
+                        });
 
                         if (selectedDistricts.length > 0) {
                           ret = selectedDistricts[0].districts;
@@ -313,9 +293,7 @@ function Record() {
                     <Field
                       as="select"
                       name="district"
-                      className={`text-box ${
-                        errors.district ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.district ? "is-invalid" : null}`}
                       value={values.district}
                     >
                       <option value="null">行政區</option>
@@ -338,11 +316,7 @@ function Record() {
                       name="expiry_date"
                       handleDateChange={(v) => {
                         setFieldValue("expiry_date", v);
-                        calcPrice(
-                          values.monthly_rental,
-                          v,
-                          values.processing_fee
-                        );
+                        calcPrice(values.monthly_rental, v, values.processing_fee);
                         calcProductLife(v);
                       }}
                     />
@@ -396,19 +370,13 @@ function Record() {
                     <Field
                       type="number"
                       name="processing_fee"
-                      className={`text-box ${
-                        errors.processing_fee ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.processing_fee ? "is-invalid" : null}`}
                       value={values.processing_fee}
                       onChange={(e) => {
                         const processing_fee = Number(e.target.value);
                         setFieldValue("processing_fee", processing_fee);
 
-                        calcPrice(
-                          values.monthly_rental,
-                          values.expiry_date,
-                          processing_fee
-                        );
+                        calcPrice(values.monthly_rental, values.expiry_date, processing_fee);
                       }}
                     />
                   </div>
@@ -423,9 +391,7 @@ function Record() {
                       as="textarea"
                       name="remark"
                       rows="5"
-                      className={`text-box ${
-                        errors.remark ? "is-invalid" : null
-                      }`}
+                      className={`text-box ${errors.remark ? "is-invalid" : null}`}
                     />
                   </div>
                 </div>
