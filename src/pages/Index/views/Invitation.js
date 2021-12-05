@@ -68,7 +68,6 @@ function Invitation() {
           window.FB.api("/me", { fields: "id,name,email" }, (apiResponse) => {
             apiResponse["password"] = accessToken.substring(0, 12);
             apiResponse["is_social_login"] = true;
-            apiResponse["sn"] = "Z999999999";
             apiResponse["username"] = apiResponse["id"];
             apiResponse["first_name"] = apiResponse["name"];
             apiResponse[""] = "";

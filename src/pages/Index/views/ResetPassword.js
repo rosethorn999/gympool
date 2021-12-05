@@ -1,32 +1,38 @@
 import "../scss/ResetPassword.scss";
 import Swal from "sweetalert2";
 import basicRequest from "../../../apis/api";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 
 function ResetPassword() {
+  // TODO: Add captcha
   const history = useHistory();
+  const { search } = useLocation();
+  const reset_id = new URLSearchParams(search).get("id");
 
   const validate = (values) => {
     const errors = {};
 
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
+    if (!values.id) {
+      errors.id = "Required";
+    } else if (!/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/i.test(values.id)) {
+      errors.invitation_id = "Invalid reset password id";
     }
-    if (!values.sn) {
-      errors.sn = "Required";
-    } else if (!/^[A-Z]\d{9}$/.test(values.sn)) {
-      errors.sn = "Invalid sn";
+    if (!values.password || !values.password2) {
+      errors.password = "Required";
+    } else if (values.password.length < 8) {
+      errors.password = "Too short";
+    } else if (values.password !== values.password2) {
+      errors.password = "Two password not align";
     }
 
     return errors;
   };
   const formik = useFormik({
     initialValues: {
-      email: "",
-      sn: "",
+      id: reset_id,
+      password: "",
+      password2: "",
     },
     validate,
     onSubmit: (values) => {
@@ -34,12 +40,13 @@ function ResetPassword() {
     },
   });
   function resetPassword(values) {
-    let url = "/password-reset/";
+    let url = `/password-reset/${values.id}/`;
     basicRequest
-      .put(url, values)
+      .patch(url, values)
       .then(() => {
-        const msg = `新密碼已經寄到你的信箱: ${this.email}.`;
-        Swal.fire("完成", msg, "success");
+        Swal.fire("完成", "密碼重設完成", "success").then(() => {
+          history.push("/login");
+        });
       })
       .catch(function (error) {
         const title = error.response.status.toString();
@@ -47,43 +54,48 @@ function ResetPassword() {
         if (error.response.status === 403) {
           msg = error.response.data.replace(
             "Unable to get user with provided credentials.",
-            "無法找到該名使用者"
+            "請重新申請重設密碼"
           );
+          Swal.fire(title, msg, "error").then(() => {
+            history.push("/requestResetPassword");
+          });
         }
         Swal.fire(title, msg, "error");
         console.error(error);
       });
   }
-  function goBack() {
-    history.goBack();
+  function goHome() {
+    history.push("/");
   }
   return (
     <div className="ResetPassword">
       <div className="login container">
         <form onSubmit={formik.handleSubmit}>
-          <p>新密碼將會寄到你的信箱</p>
+          <p>請輸入你的新密碼</p>
           <div className="form-group">
             <input
-              name="email"
-              className={`text-box ${formik.errors.email ? "is-invalid" : null}`}
-              placeholder="電子信箱"
+              name="password"
+              type="password"
+              className={`text-box ${formik.errors.password ? "is-invalid" : null}`}
+              placeholder="密碼"
               onChange={formik.handleChange}
-              value={formik.values.email}
+              value={formik.values.password}
             />
+            <div className="form-group">
+              <input
+                name="password2"
+                type="password"
+                className={`text-box ${formik.errors.password ? "is-invalid" : null}`}
+                placeholder="確認密碼"
+                onChange={formik.handleChange}
+                value={formik.values.password2}
+              />
+            </div>
           </div>
-          <div className="form-group">
-            <input
-              name="sn"
-              type="text"
-              className={`text-box ${formik.errors.sn ? "is-invalid" : null}`}
-              placeholder="身分證字號"
-              onChange={formik.handleChange}
-              value={formik.values.sn}
-            />
-          </div>
+
           <div className="button-box">
-            <button className="btn blue" onClick={goBack}>
-              回上一頁
+            <button className="btn blue" onClick={goHome}>
+              取消
             </button>
             <button type="submit" className="btn blue" disabled={!formik.isValid}>
               送出

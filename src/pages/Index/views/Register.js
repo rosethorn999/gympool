@@ -30,11 +30,6 @@ function Register() {
     } else if (values.username.length > 15) {
       errors.username = "Must be 15 characters or less";
     }
-    if (!values.sn) {
-      errors.sn = "Required";
-    } else if (!/^[A-Z]\d{9}$/.test(values.sn)) {
-      errors.sn = "Invalid sn";
-    }
     if (!values.password || !values.password2) {
       errors.password = "Required";
     } else if (values.password.length < 8) {
@@ -62,7 +57,6 @@ function Register() {
       username: "",
       password: "",
       password2: "",
-      sn: "",
       first_name: "",
       last_name: "",
     },
@@ -157,16 +151,6 @@ function Register() {
                 placeholder="確認密碼"
                 onChange={formik.handleChange}
                 value={formik.values.password2}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                name="sn"
-                type="text"
-                className={`text-box ${formik.errors.sn ? "is-invalid" : null}`}
-                placeholder="身分證字號"
-                onChange={formik.handleChange}
-                value={formik.values.sn}
               />
             </div>
             <div className="form-group">

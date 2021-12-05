@@ -14,6 +14,7 @@ import RecordDetail from "./views/RecordDetail";
 import Notice from "./views/Notice";
 import Invitation from "./views/Invitation";
 import UserLogin from "./views/UserLogin";
+import RequestResetPassword from "./views/RequestResetPassword";
 import ResetPassword from "./views/ResetPassword";
 import Register from "./views/Register";
 import PrivacyPolicy from "./views/PrivacyPolicy";
@@ -42,6 +43,7 @@ function App() {
             <Route path="/invitation" component={Invitation} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={UserLogin} />
+            <Route path="/requestResetPassword" component={RequestResetPassword} />
             <Route path="/resetPassword" component={ResetPassword} />
             <Route path="/privacyPolicy" component={PrivacyPolicy} />
           </Switch>
