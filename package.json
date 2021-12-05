@@ -81,7 +81,7 @@
     "start": "node scripts/start.js",
     "build:staging": "env-cmd -f .env.staging node scripts/build.js",
     "build": "node scripts/build.js",
-    "deploy:staging": "gsutil -m cp -r .\\build\\* gs://gympool-stg.nodm.app",
+    "deploy:staging": "gsutil -m -h \"cache-control:max-age=15\" cp -r .\\build\\* gs://gympool-stg.nodm.app",
     "deploy": "gsutil -m cp -r .\\build\\* gs://gympool.nodm.app",
     "test": "node scripts/test.js"
   },

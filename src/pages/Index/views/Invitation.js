@@ -3,9 +3,12 @@ import Swal from "sweetalert2";
 import basicRequest from "../../../apis/api";
 import { open, close } from "../components/Spinner";
 import { HashRouter as Router, Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
+import { login } from "../store/user";
 
 function Invitation() {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const validate = (values) => {
@@ -56,6 +59,92 @@ function Invitation() {
         close();
       });
   }
+  function fbLogin() {
+    const payload = { auth_type: "rerequest", scope: "email,public_profile", return_scopes: true };
+    window.FB.login(function (loginResponse) {
+      if (loginResponse.status === "connected") {
+        const { grantedScopes, accessToken } = loginResponse.authResponse;
+        if (grantedScopes.includes("email")) {
+          window.FB.api("/me", { fields: "id,name,email" }, (apiResponse) => {
+            apiResponse["password"] = accessToken.substring(0, 12);
+            apiResponse["is_social_login"] = true;
+            apiResponse["sn"] = "Z999999999";
+            apiResponse["username"] = apiResponse["id"];
+            apiResponse["first_name"] = apiResponse["name"];
+            apiResponse[""] = "";
+
+            social_register(apiResponse);
+          });
+        } else {
+          Swal.fire("權限不足", "請允許讀取Email資訊", "error");
+        }
+      } else {
+        Swal.fire("權限不足", "請允許讀取臉書權限", "error");
+      }
+    }, payload);
+  }
+
+  function clickLogin(values) {
+    open();
+    basicRequest
+      .post("/login/", values)
+      .then((response) => {
+        const token = "jwt " + response.data.token;
+        const user = response.data.user;
+        Swal.fire(`Hi ${user.first_name}`, "歡迎回來", "success").then(() => {
+          dispatch(login({ token, user }));
+          history.push("/");
+        });
+      })
+      .catch(function (error) {
+        const title = error.response.status.toString();
+        let msg = JSON.stringify(error.response.data);
+        if (error.response.status === 400) {
+          msg = error.response.data.non_field_errors?.[0].replace(
+            "Unable to log in with provided credentials.",
+            "無法使用此帳號密碼登入"
+          );
+        }
+        Swal.fire(title, msg, "error");
+        console.error(error);
+      })
+      .finally(() => {
+        close();
+      });
+  }
+  function social_register(values) {
+    open();
+
+    const url = "/user/";
+    basicRequest
+      .post(url, values)
+      .then(() => {
+        clickLogin(values);
+      })
+      .catch(function (error) {
+        if (error.response.status === 400) {
+          let msg = error.response.data;
+          const isAccountExist = msg.email?.some(
+            (o) => o === "user with this email already exists."
+          );
+          if (isAccountExist) {
+            clickLogin(values);
+          }
+        } else {
+          let msgs = [];
+          const title = error.response.status.toString();
+          if (msgs.length > 0) {
+            Swal.fire(title, msgs.join("<br>"), "error");
+          } else {
+            Swal.fire(title, JSON.stringify(error.response.data), "error");
+          }
+          console.error(error);
+        }
+      })
+      .finally(() => {
+        close();
+      });
+  }
 
   return (
     <div className="invitation">
@@ -84,6 +173,16 @@ function Invitation() {
             </button>
           </div>
         </form>
+        <h4 className="spreader">
+          <span>OR</span>
+        </h4>
+        <div>
+          <div className="button-box">
+            <button className="btn blue" onClick={() => fbLogin()}>
+              Facebook 登入
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
