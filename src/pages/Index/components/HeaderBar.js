@@ -1,11 +1,6 @@
 import "../scss/HeaderBar.scss";
 import { useState, useEffect } from "react";
-import {
-  HashRouter as Router,
-  Link,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import { HashRouter as Router, Link, useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/user";
 import store from "../store/index";
@@ -42,6 +37,7 @@ function HeaderBar() {
   }
   function clickLogout() {
     dispatch(logout());
+    history.push("/");
   }
   function triggerMobileMenu(toStatus) {
     setIsMobileMenuOpened(toStatus);
@@ -85,17 +81,8 @@ function HeaderBar() {
             <select className="search-select">
               <option value="1">標題</option>
             </select>
-            <input
-              name="search"
-              type="text"
-              className="search-text-box"
-              onChange={handleChange}
-            />
-            <button
-              type="button"
-              className="btn search-btn"
-              onClick={() => goRecords()}
-            >
+            <input name="search" type="text" className="search-text-box" onChange={handleChange} />
+            <button type="button" className="btn search-btn" onClick={() => goRecords()}>
               查詢
             </button>
           </div>
@@ -107,9 +94,8 @@ function HeaderBar() {
                 </li>
                 |
                 <li>
-                  <a href="logout" onClick={() => clickLogout()}>
-                    登出
-                  </a>
+                  {/* change to button elem due to eslint anchor-is-valid */}
+                  <button onClick={() => clickLogout()}>登出</button>
                 </li>
               </ul>
             ) : (
@@ -124,10 +110,9 @@ function HeaderBar() {
               </ul>
             )}
           </div>
-          <div
-            className="mobile-menu-area"
-            onClick={(o) => triggerMobileMenu(!isMobileMenuOpened)}
-          >
+
+          {/* Mobile View */}
+          <div className="mobile-menu-area" onClick={(o) => triggerMobileMenu(!isMobileMenuOpened)}>
             <div className={`trigger-button ${triggerButtonClass}`}>
               <p></p>
               <div className="bar1"></div>
@@ -135,37 +120,24 @@ function HeaderBar() {
               <div className="bar3"></div>
             </div>
           </div>
-          <div className={`overlay ${mobileOverlayHeight}`}>
+          <div
+            className={`overlay ${mobileOverlayHeight}`}
+            onClick={(o) => triggerMobileMenu(!isMobileMenuOpened)}
+          >
             <div className="overlay-content">
               {isLoggedIn ? (
                 <ul>
-                  <li>
-                    <a href="./manage">管理後台</a>
-                  </li>
-                  <li>
-                    <a
-                      href="logout"
-                      vue-ref="#logout"
-                      onClick={() => clickLogout()}
-                    >
-                      登出
-                    </a>
-                  </li>
+                  <li onClick={() => (window.location.href = "./manage.html")}>管理後台</li>
+                  <li onClick={() => clickLogout()}>登出</li>
                 </ul>
               ) : (
                 <ul>
-                  <li>
-                    <Link to="/invitation">註冊</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">登入</Link>
-                  </li>
+                  <li onClick={() => history.push("/invitation")}>註冊</li>
+                  <li onClick={() => history.push("/login")}>登入</li>
                 </ul>
               )}
               <ul>
-                <li>
-                  <Link to="/record">健身房會籍轉讓</Link>
-                </li>
+                <li onClick={() => history.push("/record")}>健身房會籍轉讓</li>
               </ul>
             </div>
           </div>
