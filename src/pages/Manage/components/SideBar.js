@@ -1,11 +1,11 @@
-import "../scss/Nav.scss";
+import "../scss/SideBar.scss";
 import { React, useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/user";
 import store from "../store/index";
 
-function Nav() {
+function SideBar() {
   const history = useHistory();
   const { pathname } = useLocation();
   const [routerActive, setRouterActive] = useState("");
@@ -19,9 +19,8 @@ function Nav() {
   }, [pathname]);
 
   function switchRouter(e) {
-    let targetPage = e.currentTarget.dataset.target;
-    console.log(targetPage);
-    history.push(`/targetPage`);
+    const targetPage = e.currentTarget.dataset.target;
+    history.push(targetPage);
   }
   function clickLogout() {
     dispatch(logout());
@@ -29,27 +28,41 @@ function Nav() {
   }
 
   return (
-    <div className="Nav">
-      <h1>GymPool</h1>
-      <p>健身房合約轉讓庫</p>
-      <div className="headImage"></div>
-      <p>{userName}</p>
-      <p>
-        <button onClick={() => clickLogout()}>登出</button>
-      </p>
-      <div className="item-Menu">
+    <div className="SideBar">
+      <div className="brand-area">
+        <h1>GymPool</h1>
+        <p>健身房合約轉讓庫</p>
+      </div>
+      <div className="avatar-area">
+        <div className="headImage"></div>
+        <p>{userName}</p>
+        <p>
+          <button className="btn" onClick={() => clickLogout()}>
+            登出
+          </button>
+        </p>
+      </div>
+
+      <div className="item-menu">
         <ul>
           <li
-            data-target
+            data-target="/"
             className={`${routerActive === "/" ? "active" : null}`}
-            onClick={() => switchRouter}
+            onClick={switchRouter}
           >
             <Link to="/">我的拍賣</Link>
           </li>
           <li
+            data-target="/addRecord"
+            className={`${routerActive === "/addRecord" ? "active" : null}`}
+            onClick={switchRouter}
+          >
+            <Link to="/addRecord">新增商品</Link>
+          </li>
+          <li
             data-target="account"
             className={`${routerActive === "/account" ? "active" : null}`}
-            onClick={() => switchRouter}
+            onClick={switchRouter}
           >
             <Link to="/account">會員中心</Link>
           </li>
@@ -62,4 +75,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default SideBar;

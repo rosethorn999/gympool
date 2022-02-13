@@ -1,9 +1,9 @@
 # gym-pool
-A place that share your gyml contract in Taiwan.
+
+A place for trading your gym contract in Taiwan.
 
 🚀 Migrating to React from [Vue](https://github.com/rosethorn999/gym-pool-vue).\
 🐍 Use Python Django as Backend service.
-
 
 ## Getting Started with Create React App
 

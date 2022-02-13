@@ -3,21 +3,26 @@
 .AddRecord {
   .container {
     width: 100%;
-    padding: 50px 250px;
+    padding: 10px;
+    @include pc-width {
+      padding: 5% 15%;
+    }
   }
 
   .block {
     width: 100%;
-
-    background: #ffffff;
+    background: $white;
     box-shadow: 0px 3px 6px #00000029;
-    padding: 10px 20px;
     margin-bottom: 30px;
+    padding: 10px;
+    @include pc-width {
+      padding: 20px;
+    }
     h3 {
-      color: #0350cc;
+      color: $electric-blue;
     }
     > div {
-      padding: 0px 180px;
+      padding: 10px;
     }
   }
   .form-group {

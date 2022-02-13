@@ -22,7 +22,7 @@
     box-sizing: border-box;
     height: 307px;
     background-image: url("../assets/bg.png");
-    color: #fff;
+    color: $white;
     padding: 60px $phone-padding 150px;
     width: 100%;
     @include pc-width {
@@ -38,7 +38,7 @@
         color: #dee2e6;
       }
       a:hover {
-        color: #fff;
+        color: $white;
       }
       &:last-child {
         font-size: $pc-font-size;
@@ -73,27 +73,6 @@
         .main-image {
           width: 100%;
           border: 1px solid $whisper;
-        }
-        .img-box {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          overflow: auto;
-          margin: 33px 0px 41px 0px;
-          img {
-            cursor: pointer;
-            width: 100%;
-            flex: 1;
-            border: 1px solid $whisper;
-            max-width: 105px;
-            margin-right: 10px;
-          }
-        }
-        .tag-box {
-          a {
-            display: inline-block;
-            margin-right: 18px;
-          }
         }
       }
       .right-box {

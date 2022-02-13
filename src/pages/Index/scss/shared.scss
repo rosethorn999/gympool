@@ -24,11 +24,11 @@ ul {
 
   &.blue {
     background: $dodger-blue;
-    color: #fff;
+    color: $white;
   }
   &.pink {
     background: $pink;
-    color: #fff;
+    color: $white;
   }
   &:focus {
     outline: none;

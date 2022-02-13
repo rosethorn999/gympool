@@ -11,7 +11,7 @@
     text-decoration: none;
     color: #dee2e6;
     &:hover {
-      color: #fff;
+      color: $white;
     }
   }
 
@@ -29,12 +29,12 @@
       margin-bottom: 8px;
       &.fans-club > a {
         padding: 10px 25px;
-        border: 1px solid #fff;
+        border: 1px solid $white;
       }
     }
   }
   .footer-block {
-    color: #fff;
+    color: $white;
     background: #30363b;
     min-height: 200px;
     width: 100%;
@@ -68,7 +68,7 @@
     }
   }
   .copyright {
-    color: #fff;
+    color: $white;
     margin: 0px;
     height: 105px;
     line-height: 105px;

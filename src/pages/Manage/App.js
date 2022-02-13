@@ -7,13 +7,15 @@ import Index from "./views/Index";
 import AddRecord from "./views/AddRecord";
 import Record from "./views/Record";
 import Account from "./views/Account";
-import Nav from "./components/Nav";
+import HeaderBar from "./components/HeaderBar";
+import SideBar from "./components/SideBar";
 
 function App() {
   return (
     <Router>
+      <HeaderBar />
       <div className="App">
-        <Nav />
+        <SideBar />
         <div className="router-view">
           <Switch>
             <Route exact path="/" component={Index} />

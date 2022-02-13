@@ -1,14 +1,14 @@
 @import "../../scss/mixins";
 @import "../../scss/_variables";
 .index {
-  background: #fff;
+  background: $white;
   width: 100%;
 
   .slider-banner {
     height: 100vh;
     position: relative;
     text-align: center;
-    color: #ffffff;
+    color: $white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +30,7 @@
       }
     }
     a:visited {
-      color: #fff;
+      color: $white;
     }
 
     .county-area {
@@ -55,7 +55,7 @@
             line-height: 30px;
             color: #dee2e6;
             &:hover {
-              color: #fff;
+              color: $white;
             }
           }
         }
@@ -100,7 +100,7 @@
   }
   .why-area {
     padding: 30px $phone-padding;
-    background: #fff;
+    background: $white;
     @include pc-width {
       padding: 67px $pc-padding;
     }
@@ -143,7 +143,7 @@
     box-sizing: border-box;
     height: 307px;
     background-image: url("../assets/bg.png");
-    color: #fff;
+    color: $white;
     padding: 60px $phone-padding 150px;
     width: 100%;
     @include pc-width {
@@ -159,7 +159,7 @@
         color: #dee2e6;
       }
       a:hover {
-        color: #fff;
+        color: $white;
       }
       &:last-child {
         font-size: $pc-font-size;

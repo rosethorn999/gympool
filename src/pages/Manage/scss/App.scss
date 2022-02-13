@@ -1,29 +1,19 @@
 @import "../../scss/mixins";
 @import "../../scss/_variables";
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 body {
   width: 100vw;
 }
 
 .App {
-  display: inline-block;
   font-family: "Noto Sans TC", Arial, sans-serif;
-  width: 1920px;
-  color: #2c3e50;
-  background: #222222;
-  @include pc-width {
-    width: 100%;
-  }
+  color: $night-rider;
+  background: $white-smoke;
   input[type="number"],
   input[type="text"],
   select,
   textarea {
-    border-radius: 2px;
+    border-radius: 5px;
     padding: 8px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     height: 32px;
@@ -52,20 +42,19 @@ body {
   }
   button.add-record {
     position: fixed;
-    bottom: 1%;
-    right: 1%;
+    bottom: 3%;
+    right: 3%;
+    width: 60px;
+    height: 60px;
     cursor: pointer;
     color: $white;
-    background-color: black;
+    background-color: $black;
     margin: 6px 8px;
-    width: 85px;
-    height: 85px;
-    font-size: 50px;
-    background-position: 50% 40%;
+    font-size: 60px;
     background-size: auto;
     border-radius: 50%;
     border: 0;
-    overflow: hidden;
+    line-height: 30px;
     opacity: 0.9;
     &:hover {
       opacity: 1;
@@ -73,16 +62,16 @@ body {
   }
   select.danger,
   input.danger {
-    border: #ff5252 solid 1px;
+    border: $bloodred solid 1px;
   }
   p.danger {
-    color: #ff5252;
+    color: $bloodred;
   }
   .modal {
     top: 0;
     position: fixed;
     z-index: $Z-INDEX-MODAL;
-    background: #fff;
+    background: $white;
     width: 100vw;
     height: 100vh;
     .modal-header {
@@ -104,35 +93,14 @@ body {
     }
   }
   .router-view {
+    width: 100%;
+    height: 100vh;
     display: inline-block;
     background: $white-smoke;
-    width: 85%;
-    min-height: 100vh;
-    margin-left: 15%;
-  }
-  .btn {
-    height: 40px;
-    padding: 5px 30px;
-    border-radius: 13px;
-    margin: 0px 12px;
-    cursor: pointer;
-    &.blue {
-      background: $dodger-blue;
-      color: #fff;
-    }
-    &.pink {
-      background: $pink;
-      color: #fff;
-    }
-    &:focus {
-      outline: none;
-    }
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.65;
-    }
-    &:hover {
-      opacity: 0.9;
+    min-height: calc(100vh - 67px);
+    overflow: auto;
+    @include pc-width {
+      width: calc(100vw - $SideBarWidth);
     }
   }
 }

@@ -63,23 +63,6 @@ function RecordDetail() {
           <div className="upper-box">
             <div className="left-box">
               <img className="main-image" src="https://via.placeholder.com/583x334" alt="mainPic" />
-              <div className="img-box">
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-                <img src="https://via.placeholder.com/105x60" alt="img" />
-              </div>
-              <div className="tag-box">
-                <a href="#/">#tag</a>
-                <a href="#/">#tag</a>
-                <a href="#/">#tag</a>
-                <a href="#/">#tag</a>
-                <a href="#/">#tag</a>
-                <a href="#/">#tag</a>
-              </div>
             </div>
             <div className="right-box">
               {inventory <= 0 && <p>已售出</p>}

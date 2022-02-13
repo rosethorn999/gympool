@@ -15,16 +15,18 @@ ul {
 .btn {
   height: 35px;
   padding: 5px 30px;
-  // border-radius: 13px;
+  border: none;
+  border-radius: 35px;
   margin: 0px 12px;
   cursor: pointer;
+
   &.blue {
     background: $dodger-blue;
-    color: #fff;
+    color: $white;
   }
   &.pink {
     background: $pink;
-    color: #fff;
+    color: $white;
   }
   &:focus {
     outline: none;

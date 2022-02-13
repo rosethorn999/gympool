@@ -5,7 +5,6 @@ import basicRequest from "../../../apis/api";
 import Swal from "sweetalert2";
 import selections from "../assets/selections.json";
 import store from "../store/index";
-import more from "../assets/more.png";
 import loading from "../assets/loading.gif";
 import world_gym__1448962972_16f5e373 from "../assets/world_gym__1448962972_16f5e373.jpg";
 
@@ -28,8 +27,7 @@ function Index() {
     gym_types: selections[0].list,
   });
   const user = store.getState().user.user;
-  const [search, setSearch] = useState("");
-  const [showMenuIndex, setShowMenuIndex] = useState(-1);
+  const [searchText, setSearchText] = useState("");
   const [fetchRecordUrl, setFetchRecordUrl] = useState(baseRecordUrl);
 
   useEffect(() => {
@@ -53,8 +51,8 @@ function Index() {
       }
     }
     // search
-    if (search) {
-      urlSearch.set("search", search);
+    if (searchText) {
+      urlSearch.set("search", searchText);
     }
 
     // ordering
@@ -82,7 +80,7 @@ function Index() {
     ordering.create_time,
     ordering.monthly_rental,
     pagination.pageIndex,
-    search,
+    searchText,
     user,
   ]);
 
@@ -113,22 +111,9 @@ function Index() {
     ordering,
     pagination.nextUrl,
     pagination.pageIndex,
-    search,
+    searchText,
     user,
   ]);
-
-  const max30Chr = (v) => {
-    if (v && v.length > 27) {
-      return v.substr(0, 27) + "...";
-    }
-    return v;
-  };
-
-  function triggerMenu(index) {
-    setShowMenuIndex(index);
-    closeAllDropDownMenu();
-  }
-
   function addRecord() {
     history.push(`/addRecord`);
   }
@@ -184,19 +169,18 @@ function Index() {
       return "無法計算";
     }
   }
-  function closeAllDropDownMenu() {
-    setTimeout(() => {
-      setShowMenuIndex(-1);
-    }, 2000);
-  }
   function handleChange(event) {
     switch (event.target.name) {
       case "search":
-        setSearch(event.target.value.trim());
+        setSearchText(event.target.value.trim());
+        search();
         break;
       default:
         break;
     }
+  }
+  function search(t) {
+    // TODO: event
   }
 
   return (
@@ -205,26 +189,15 @@ function Index() {
         <button className="add-record" onClick={() => addRecord()}>
           &#43;
         </button>
-
         <div className="search-bar">
-          {/* TODO magnifier icon  */}
-          <input
-            type="text"
-            name="search"
-            placeholder="標題"
-            value={search}
-            onChange={handleChange}
-          />
-          <button
-            className="btn blue"
-            onClick={() => setCurrentPage(currentPage)}
-          >
-            送出
+          <input type="text" name="search" onChange={handleChange}></input>
+          <button type="button" className="search-button">
+            | 🔍
           </button>
         </div>
         <div className="list-header">
           <div>
-            <h2 id="recordCount">筆數 {recordCount}</h2>
+            <span id="recordCount">筆數 {recordCount}</span>
           </div>
           <div>
             <select
@@ -271,44 +244,31 @@ function Index() {
                       {r.inventory <= 0 && <p>已售出</p>}
                       <img src={world_gym__1448962972_16f5e373} alt="pic" />
                     </div>
+                    <div className="msg-block">
+                      <div className="price-block">
+                        <span className="blue-text">NT{getPrice(r)}</span>
+                      </div>
+                      <div className="detail-block">
+                        <span>到期日: {r.expiry_date}</span>
+                        <br />
+                        <span>
+                          轉讓費: {r.processing_fee}元&nbsp;&nbsp;&nbsp;&nbsp;{r.monthly_rental} /
+                          月
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   <div className="title-block">
-                    <p>{r.title}</p>
-                    <p>{gym_typeCaption(r.gym_type, r.store)}</p>
-                    <p>{max30Chr(r.remark)}</p>
+                    <h1>{r.title}</h1>
+                    <h2>{gym_typeCaption(r.gym_type, r.store)}</h2>
                   </div>
-                  <div className="price-block">
-                    <p className="blue-text">NT{getPrice(r)}</p>
-                  </div>
-                  <div className="detail-block">
-                    <p>轉讓費: {r.processing_fee}</p>
-                    <p>月費: {r.monthly_rental} / 月</p>
-                    <p>到期日: {r.expiry_date}</p>
-                  </div>
-                  <div className="more-block">
-                    <img
-                      className="more"
-                      src={more}
-                      onClick={() => triggerMenu(i)}
-                      alt="more"
-                    />
-                    {showMenuIndex === i && (
-                      <div className="dropdown-menu show">
-                        {/* TODO triangle */}
-                        <button
-                          className="dropdown-item"
-                          onClick={() => checkout(i)}
-                        >
-                          修改
-                        </button>
-                        <button
-                          className="dropdown-item"
-                          onClick={() => remove(i)}
-                        >
-                          刪除
-                        </button>
-                      </div>
-                    )}
+                  <div className="buttons">
+                    <button className="edit-button" onClick={() => checkout(i)}>
+                      修改
+                    </button>
+                    <button className="remove-button" onClick={() => remove(i)}>
+                      刪除
+                    </button>
                   </div>
                 </li>
               );

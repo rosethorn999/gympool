@@ -412,7 +412,6 @@ function Record() {
               <div className="button-box">
                 <button
                   className="btn pink"
-                  style={{ marginRight: "150px" }}
                   onClick={() => markAsSoldOut()}
                   disabled={values.inventory <= 0}
                 >
