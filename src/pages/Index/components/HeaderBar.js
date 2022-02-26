@@ -4,7 +4,7 @@ import { HashRouter as Router, Link, useLocation, useHistory } from "react-route
 import { useDispatch } from "react-redux";
 import { logout } from "../store/user";
 import store from "../store/index";
-import { ReactComponent as BrandIcon } from "../assets/logo.svg";
+import { ReactComponent as BrandIcon } from "../assets/gymPoolLogo.svg";
 
 function HeaderBar() {
   const dispatch = useDispatch();
@@ -67,13 +67,14 @@ function HeaderBar() {
         <header>
           <div className="logo-area" onClick={goIndex}>
             <BrandIcon id="brandIcon" />
-            &nbsp;
-            <Link to="/">GymPool</Link>
           </div>
           <div className="menu-area">
             <ul>
+            <li>
+                <Link to="/record">首頁</Link>
+              </li>
               <li>
-                <Link to="/record">健身房會籍轉讓</Link>
+                <Link to="/record">週邊會籍轉讓</Link>
               </li>
             </ul>
           </div>
