@@ -61,6 +61,9 @@ function Index() {
               有<span className="mark">{recordCount}</span>
               件刊登商品
             </p>
+            <p>
+              尋找你所在的城市
+            </p>
             <div className="county-area">
               <ul className="circles">
                 {countyScatter.map((item) => {
@@ -131,8 +134,9 @@ function Index() {
             })}
           </div>
           <div className="watch-more-block">
+          看
             <Link router-link="true" className="watch-more" to="/record">
-              看更多
+              更多選項
             </Link>
           </div>
         </div>

@@ -14,7 +14,7 @@
     text-align: center;
     box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
     padding: 0px 20px;
-    font-size: 20px;
+    font-size: 16px;
     @include pc-width {
       padding: 0px;
       background: $white;
@@ -25,7 +25,7 @@
     height: 100%;
     line-height: 67px;
     width: 50%;
-    background: $persian-red;
+
     text-align: left;
     font-size: 28px;
     transition: 0.4s;
@@ -34,7 +34,7 @@
       color: $white;
     }
     #brandIcon {
-      width: 40px;
+      width: 180px;
       vertical-align: middle;
     }
     @include pc-width {
@@ -42,7 +42,7 @@
       max-width: 300px;
       flex: 2;
       &:hover {
-        background: $bloodred;
+        background: $gympoolblue;
       }
     }
   }
@@ -51,6 +51,7 @@
     line-height: 67px;
     text-align: center;
     display: none;
+    
     @include pc-width {
       flex: 4;
       display: block;
@@ -61,7 +62,7 @@
     }
     li {
       display: inline-block;
-      margin: 0px 10px;
+      margin: 0px 15px;
     }
   }
   .search-bar {
@@ -80,15 +81,21 @@
       vertical-align: middle;
       background-color: $white;
       border: 0px;
-      outline: 1px solid $white-smoke;
+      outline: 1px solid $whisper;
       outline-offset: 0px;
+      border-radius: $border-readius 0 0 $border-readius;
+      box-sizing: border-box;
+      padding: 5px;
     }
     .search-text-box {
       display: inline-block;
       height: 34px;
       vertical-align: middle;
       max-width: calc(100% - 10rem);
-      border: 1px solid $white-smoke;
+      border: 1px solid $whisper;
+      box-sizing: border-box;
+      padding: 5px;
+
     }
     .search-btn {
       display: inline-block;
@@ -96,7 +103,7 @@
       width: 4rem;
       padding: 0px;
       margin-right: 0px;
-    }
+      border-radius: 0 $border-readius  $border-readius 0    }
   }
   .login-area {
     height: 100%;
@@ -111,8 +118,7 @@
       display: inline-block;
       a {
         margin: 0px 10px;
-        color: $persian-red;
-        text-decoration: none;
+         text-decoration: none;
       }
       button {
         cursor: pointer;
@@ -121,7 +127,7 @@
         margin: 0px 10px;
         border: none;
         background-color: transparent;
-        color: $persian-red;
+        color: $gympoolblue;
       }
     }
   }
