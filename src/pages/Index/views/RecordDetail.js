@@ -47,14 +47,6 @@ function RecordDetail() {
   };
   return (
     <div className="recordDetail">
-      <div className="you-should-know">
-        <p>健身會籍轉讓需知</p>
-        <p>
-          <Router>
-            <Link to="/notice">需要注意的事情</Link>
-          </Router>
-        </p>
-      </div>
       <div className="container">
         <div className="controller" onClick={goBack}>
           &larr; 回上一頁
@@ -62,21 +54,39 @@ function RecordDetail() {
         <div className="record-container">
           <div className="upper-box">
             <div className="left-box">
+            <h1>{title}</h1>
+            <span>{inventory <= 0 && <p>已售出</p>}</span>
               <img className="main-image" src="https://via.placeholder.com/583x334" alt="mainPic" />
+              <div className="contacts-box">
+                <h3>聯絡資訊</h3>
+                <p>賣家資訊: {creator}</p>
+
+                <img src="https://via.placeholder.com/50" alt="img" />
+                <img src="https://via.placeholder.com/50" alt="img" />
+                <img src="https://via.placeholder.com/50" alt="img" />
+              </div>
             </div>
             <div className="right-box">
-              {inventory <= 0 && <p>已售出</p>}
-              <h1>{title}</h1>
+              <h5>
+                店名
+              </h5>
               <h3>
                 {gym_typeCaption(gym_type)} {store}
               </h3>
-              <h4>到期日: {expiry_date}</h4>
-              <p>&nbsp;</p>
-              <p>建立日期: {create_time}</p>
               <p>
-                所在地: {county}
+                {county}
                 {district}
               </p>
+
+              <div className="record-date-block">
+              <h5>
+              合約到期日
+              </h5>
+              <h4> {expiry_date}</h4>
+              <p>建立日期: {create_time}</p>
+
+              </div>
+
               {/* <p>
                 場館特色:{" "}
                 {selection.features.map(
@@ -86,25 +96,24 @@ function RecordDetail() {
                     )
                 )}
               </p> */}
-              <p>賣家資訊: {creator}</p>
-              <h3>&nbsp;</h3>
-              <h1>
-                價格 : <span className="blue">NT ${price()}</span>
-              </h1>
-              <h3 className="gray">月費: ${monthly_rental}/月</h3>
-              <h3 className="gray">轉讓費: ${processing_fee}</h3>
-              <div className="contacts-box">
-                <img src="https://via.placeholder.com/50" alt="img" />
-                <img src="https://via.placeholder.com/50" alt="img" />
-                <img src="https://via.placeholder.com/50" alt="img" />
+              <div className="record-price">
+              <h5>
+                價格
+              </h5>
+              <h6  className="blue">NT ${price()}</h6>
+              <p className="gray">月費: ${monthly_rental}/月</p>
+              <p className="gray">轉讓費: ${processing_fee}</p>
+
+              <div className="bottom-box">
+            <div className="header">備註</div>
+            <div className="remark">{remark}</div>
+          </div>
+
               </div>
             </div>
           </div>
 
-          <div className="bottom-box">
-            <div className="header">備註</div>
-            <div className="remark">{remark}</div>
-          </div>
+
         </div>
       </div>
     </div>
