@@ -22,6 +22,7 @@ import PrivacyPolicy from "./views/PrivacyPolicy";
 import { Spinner } from "./components/Spinner";
 import MobileNav from "./components/MobileNav";
 
+
 function App() {
   return (
     <div className="App">
