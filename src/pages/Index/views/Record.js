@@ -169,23 +169,23 @@ function Record() {
               className="search-button"
               onClick={() => console.log("search button clicked")}
             >
-              | 🔍
+              <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </div>
           <div className="query-fun">
-            <ul className="country-tab-container">
-              {["全部", ...municipalities].map((o, i) => {
+            <select className="country-tab-container">
+              {["全部區", ...municipalities].map((o, i) => {
                 return (
-                  <li
+                  <option
                     key={o}
                     className={`country-tab ${activeTab === o ? "active" : ""}`}
                     onClick={() => setActiveTab(o)}
                   >
                     {o}
-                  </li>
+                  </option>
                 );
               })}
-            </ul>
+            </select>
           </div>
         </div>
         <div className="record-container">
