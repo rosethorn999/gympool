@@ -2,6 +2,8 @@ import "../scss/RecordBox.scss";
 import selections from "../assets/selections.json";
 import defaultBackground from "../assets/world_gym__1448962972_16f5e373.jpg";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 function RecordBox(props) {
   const { fitXs, handleClick } = props;
@@ -73,7 +75,10 @@ function RecordBox(props) {
           <div style={{ clear: "both" }}></div>
         </div>
       </div>
-      <div className="view-count font-size-14">👁️ {view}</div>
+      <div className="view-count font-size-14">
+        <FontAwesomeIcon icon={regular("eye")} />
+        &nbsp; {view}
+      </div>
     </div>
   );
 }
