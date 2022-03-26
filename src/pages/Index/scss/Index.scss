@@ -52,13 +52,12 @@
             margin: 0px;
             padding: 0;
             line-height: 30px;
-            
           }
           a.area-btn {
             line-height: 30px;
             color: $night-rider;
             &:hover {
-              color: $white;
+              color: $gympoolblue;
             }
           }
         }
@@ -103,7 +102,7 @@
   .why-area {
     padding: 30px $phone-padding;
     background: $white;
-    display : none;
+    display: none;
     @include pc-width {
       padding: 67px $pc-padding;
     }
@@ -123,7 +122,7 @@
     padding: 50px $phone-padding 0px;
     background: #ededed;
     font-size: 30px;
-    display : none;
+    display: none;
 
     @include pc-width {
       font-size: 40px;
@@ -180,7 +179,7 @@
       padding: 100px $pc-padding;
     }
 
-    p:first-child{
+    h5 {
       padding: 0 6%;
     }
     .record-container {

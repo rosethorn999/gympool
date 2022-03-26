@@ -7,7 +7,7 @@
   z-index: $Z-INDEX-HEADER;
 
   header {
-    background: $persian-red;
+    background: $white;
     display: flex;
     width: 100%;
     overflow: auto;
@@ -50,7 +50,7 @@
     line-height: 67px;
     text-align: center;
     display: none;
-    
+
     @include pc-width {
       flex: 4;
       display: block;
@@ -94,7 +94,6 @@
       border: 1px solid $whisper;
       box-sizing: border-box;
       padding: 5px;
-
     }
     .search-btn {
       display: inline-block;
@@ -102,7 +101,8 @@
       width: 4rem;
       padding: 0px;
       margin-right: 0px;
-      border-radius: 0 $border-readius  $border-readius 0    }
+      border-radius: 0 $border-readius $border-readius 0;
+    }
   }
   .login-area {
     height: 100%;
@@ -117,16 +117,15 @@
       display: inline-block;
       a {
         margin: 0px 10px;
-         text-decoration: none;
+        text-decoration: none;
       }
       button {
+        font-size: 16px;
         cursor: pointer;
-        font-size: 20px;
         padding: 0;
         margin: 0px 10px;
         border: none;
         background-color: transparent;
-        color: $gympoolblue;
       }
     }
   }
@@ -136,7 +135,7 @@
     .trigger-button > div {
       width: 35px;
       height: 3px;
-      background-color: $white;
+      background-color: $black;
       margin: 6px 0;
       transition: 0.4s;
     }
@@ -162,7 +161,7 @@
     z-index: $Z-INDEX-HEADER;
     top: 66px;
     left: 0;
-    background-color: $persian-red;
+    background-color: $white;
     overflow-y: hidden;
     transition: 0.5s;
     &.open {
@@ -180,7 +179,7 @@
       margin-bottom: 2em;
     }
     li {
-      color: $white;
+      color: $night-rider;
       line-height: 3rem;
       display: block;
     }

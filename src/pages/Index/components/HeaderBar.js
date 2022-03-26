@@ -70,8 +70,8 @@ function HeaderBar() {
           </div>
           <div className="menu-area">
             <ul>
-            <li>
-                <Link to="/record">首頁</Link>
+              <li>
+                <Link to="/">首頁</Link>
               </li>
               <li>
                 <Link to="/record">週邊會籍轉讓</Link>
