@@ -95,11 +95,11 @@ function HeaderBar() {
           >
             <div className="overlay-content">
               <ul>
-                <li onClick={() => (window.location.href = "./manage.html")}>我的拍賣</li>
+                <li onClick={() => (window.location.href = "./manage")}>我的拍賣</li>
                 <li onClick={() => clickLogout()}>登出</li>
               </ul>
               <ul>
-                <li onClick={() => (window.location.href = "./index.html")}>回首頁</li>
+                <li onClick={() => (window.location.href = "./index")}>回首頁</li>
               </ul>
             </div>
           </div>

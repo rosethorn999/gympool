@@ -91,7 +91,7 @@ function HeaderBar() {
             {isLoggedIn ? (
               <ul>
                 <li>
-                  <a href="./manage.html">管理後台</a>
+                  <a href="./manage">管理後台</a>
                 </li>
                 |
                 <li>
@@ -128,7 +128,7 @@ function HeaderBar() {
             <div className="overlay-content">
               {isLoggedIn ? (
                 <ul>
-                  <li onClick={() => (window.location.href = "./manage.html")}>管理後台</li>
+                  <li onClick={() => (window.location.href = "./manage")}>管理後台</li>
                   <li onClick={() => clickLogout()}>登出</li>
                 </ul>
               ) : (
