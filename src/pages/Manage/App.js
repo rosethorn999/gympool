@@ -28,5 +28,5 @@ function App() {
     </Router>
   );
 }
-
+console.log("hihi mars");
 export default App;
